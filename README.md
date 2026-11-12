@@ -72,14 +72,18 @@ deploy workflow. Settings of the Pages project:
 | Variable `ASTRO_TELEMETRY_DISABLED` | `1` |
 
 Cloudflare takes the Node.js version from `.node-version` and the response
-headers from `public/_headers`. The domain `kyro-pxe.sh` is added under
+headers from `public/_headers`. Those headers hold a Content Security Policy
+for the whole site and a stricter one for `/generator/`. The domain `kyro-pxe.sh` is added under
 *Custom domains* in the Pages project.
 
 **Moving to another host.** Nothing in the build depends on Cloudflare, so
 any static file server can serve `dist/`. Two things need attention:
 
 - `public/_headers` is a Cloudflare format. Another server has to send the
-  same headers from its own configuration.
+  same headers from its own configuration. On a host that cannot set
+  headers, such as GitHub Pages, they are lost. The generator page repeats
+  its Content Security Policy in a `<meta>` element, so that part stays in
+  force everywhere.
 - If the address changes, set the environment variable `SITE_URL` for the
   build so that canonical links and the sitemap match.
 

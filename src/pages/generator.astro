@@ -3,9 +3,11 @@
 // built yet; this page only says so. The design is in docs/adr/.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Status from '../components/Status.astro';
+import { generatorPolicy } from '../data/csp';
 ---
 
 <BaseLayout
+  csp={generatorPolicy}
   title="autounattend.xml generator | Kyro"
   description="Reserved for a browser-based generator for Windows autounattend.xml files. It is not built yet."
 >

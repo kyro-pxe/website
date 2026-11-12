@@ -1,6 +1,28 @@
-# Response headers for Cloudflare Pages. GitHub Pages ignores this file and
-# cannot set custom headers.
+# Response headers for Cloudflare Pages.
+# https://developers.cloudflare.com/pages/configuration/headers/
+#
+# A request that matches several rules gets the headers of all of them. Two
+# Content-Security-Policy values reach the browser as two policies, and it
+# enforces both. The rule for the generator can therefore only tighten the
+# policy of the whole site, never loosen it.
+
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: no-referrer
+  Cross-Origin-Opener-Policy: same-origin
+  Permissions-Policy: camera=(), geolocation=(), microphone=(), payment=(), usb=()
+  Content-Security-Policy: default-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+
+# The generator handles passwords. Its page loads scripts, styles and images
+# from this site only, and its scripts cannot open a network connection.
+# src/data/csp.ts repeats this policy for the page's <meta> element.
+/generator/*
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+
+# The site lives at kyro-pxe.sh. Keep the pages.dev addresses of the same
+# content out of search engines.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
