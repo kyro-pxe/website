@@ -51,6 +51,21 @@ Commits follow [Conventional Commits](https://www.conventionalcommits.org/)
 and must be signed off (`git commit -s`), as in the
 [Kyro repository](https://github.com/kyro-pxe/kyro/blob/main/CONTRIBUTING.md).
 
+## License
+
+Copyright (C) 2026 Lukas Koch and Kyro contributors.
+
+This repository uses two licenses:
+
+- **Site code** is free software under the GNU General Public License,
+  version 3 or (at your option) any later version. See [LICENSE](LICENSE).
+  This covers everything that is not documentation content: configuration,
+  components, styles, scripts and the generator.
+- **Documentation content** is licensed under the Creative Commons
+  Attribution 4.0 International License (CC BY 4.0). See
+  [LICENSE-docs](LICENSE-docs). This covers the pages in `src/content/docs/`
+  and the documents in `docs/`.
+
 Windows is a trademark of the Microsoft group of companies. Kyro is not
 affiliated with or endorsed by Microsoft, and this repository contains no
 Microsoft software, files or logos.
