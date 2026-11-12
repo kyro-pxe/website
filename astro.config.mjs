@@ -10,11 +10,19 @@ export default defineConfig({
   site,
   output: 'static',
   trailingSlash: 'always',
+  // Scripts and styles as files, never inline. A strict Content Security
+  // Policy on the generator page depends on this.
   build: {
-    // Styles as files, never inline. A strict Content Security Policy on
-    // the generator page depends on this.
     inlineStylesheets: 'never',
   },
+  vite: {
+    build: {
+      assetsInlineLimit: 0,
+    },
+  },
+  // Starlight turns link prefetching on. The generator page must not open
+  // connections on its own, and the pages are small, so it is off.
+  prefetch: false,
   integrations: [
     // Starlight renders the documentation in src/content/docs/. The home
     // page, the generator and the 404 page are standalone pages in src/pages/.
