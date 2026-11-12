@@ -5,9 +5,9 @@ Source of <https://kyro-pxe.sh>: the documentation site for
 booting Windows 11 ISOs, and the future home of a browser-based
 `autounattend.xml` generator.
 
-> **Status: early development.** The site scaffold exists. The documentation
-> pages and the generator are not built yet. Kyro itself cannot boot anything
-> yet.
+> **Status: early development.** The home page and the site's design exist.
+> The documentation pages and the generator are not built yet. Kyro itself
+> cannot boot anything yet.
 
 ## Development
 
@@ -33,13 +33,23 @@ with `pnpm astro telemetry disable` or by setting `ASTRO_TELEMETRY_DISABLED=1`.
 
 | Path | Content |
 | ---- | ------- |
-| `src/content/docs/` | Documentation pages (Markdown and MDX). English is at the root of this folder. |
+| `src/content/docs/` | Documentation pages (Markdown and MDX), rendered by Starlight. English is at the root of this folder. Empty so far. |
 | `src/content/i18n/` | Overrides and translations of interface strings. |
-| `src/pages/` | Pages that are not plain documentation, such as `/generator`. |
-| `src/styles/`, `src/components/` | Theme and component overrides. |
+| `src/pages/` | Standalone pages: home, `/generator` and the 404 page. |
+| `src/layouts/` | The layout of the standalone pages. |
+| `src/components/` | Shared parts (header, footer, status marker, boot chain). `starlight/` holds the overrides that make documentation pages use them. |
+| `src/data/` | Content that is data, such as the boot chain steps and their status. |
+| `src/styles/` | `tokens.css` (colours, fonts, spacing), `site.css` (standalone pages), `starlight.css` (maps the tokens onto Starlight). |
 | `public/` | Files copied to the site root unchanged. |
+| `DESIGN.md` | The design direction and the reason for each visual decision. Read it before changing how the site looks. |
 | `docs/` | Documents about this repository, such as decision records. Not published on the site. |
 | `astro.config.mjs` | Site configuration and sidebar. |
+
+Kyro has no logo yet. The header shows the name as text and the favicon shows
+the initial. `DESIGN.md` says where a logo goes once one exists.
+
+The status of each boot step on the home page is kept by hand in
+`src/data/boot-chain.ts`. The roadmap in the Kyro repository is authoritative.
 
 The site is built with [Astro](https://astro.build) and
 [Starlight](https://starlight.astro.build) as static files. It loads no
