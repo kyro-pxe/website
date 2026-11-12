@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BootChain from '../components/BootChain.astro';
+import Status from '../components/Status.astro';
+import { checkedOn } from '../data/boot-chain';
+
+const checked = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long', timeZone: 'UTC' }).format(
+  new Date(`${checkedOn}T00:00:00Z`),
+);
+---
+
+<BaseLayout
+  title="Kyro: open-source PXE server for Windows 11"
+  description="Kyro is an open-source PXE server for installing Windows 11 over the network. It is in early development and cannot boot a machine yet."
+>
+  <div class="prose">
+    <h1>Kyro is an open-source PXE server for installing Windows&nbsp;11 over the network.</h1>
+    <Status state="in-progress" block>
+      Kyro is being designed and cannot boot a machine yet. This page says so until that changes.
+    </Status>
+    <p>
+      The goal: you point Kyro at a Windows 11 ISO, and a PC that boots from the network gets
+      Windows Setup from it. No USB stick, no unpacking the ISO by hand, and with an answer file
+      no one has to sit in front of the installer.
+    </p>
+  </div>
+
+  <section class="section" aria-labelledby="chain">
+    <h2 id="chain">From power-on to Windows Setup</h2>
+    <p class="prose">
+      Six things have to happen before Windows Setup runs on a machine that booted from the
+      network. Kyro is meant to serve all of them from one program.
+    </p>
+    <BootChain />
+    <p class="note chain-note">
+      Compared with the{' '}
+      <a href="https://github.com/kyro-pxe/kyro/blob/main/docs/ROADMAP.md">roadmap in the Kyro repository</a>{' '}
+      on {checked}. If the two differ, the roadmap is right.
+    </p>
+  </section>
+
+  <div class="split">
+    <section class="section prose" aria-labelledby="generator">
+      <h2 id="generator">Answer file generator</h2>
+      <p>
+        <Status state="planned">The options are written down as a proposal. Nothing is built.</Status>
+      </p>
+      <p>
+        A form on this site is going to create <code>autounattend.xml</code> files: language,
+        accounts, disk layout and the other things Windows Setup would otherwise ask. It is
+        meant to run in the browser only, so that what you type, passwords included, stays on
+        your computer.
+      </p>
+      <ul class="links">
+        <li>
+          <a href="https://github.com/kyro-pxe/website/blob/main/docs/adr/0001-generator-options.md">Read the proposed option set</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="project">
+      <h2 id="project">Project</h2>
+      <ul class="links">
+        <li><a href="https://github.com/kyro-pxe/kyro">Kyro source code</a></li>
+        <li><a href="https://github.com/kyro-pxe/kyro/blob/main/docs/ROADMAP.md">Roadmap</a></li>
+        <li><a href="https://github.com/kyro-pxe/kyro/blob/main/docs/security-model.md">Security model</a></li>
+        <li><a href="https://github.com/kyro-pxe/website">Source of this site</a></li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .chain-note {
+    margin-block-start: var(--space-3);
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+// The numbered steps from power-on to Windows Setup, with protocol and
+// status per step. A table on wide screens, stacked rows on narrow ones.
+import Status from './Status.astro';
+import { bootChain } from '../data/boot-chain';
+
+/** Splits "text `code` text" into alternating text and code parts. */
+const parts = (text: string) =>
+  text.split('`').map((value, index) => ({ value, code: index % 2 === 1 }));
+---
+
+<div class="chain">
+  <div class="chain-head" aria-hidden="true">
+    <span>Step</span>
+    <span>What happens</span>
+    <span>Protocol</span>
+    <span>Status</span>
+  </div>
+  <ol>
+    {
+      bootChain.map((step, index) => (
+        <li>
+          <span class="n">{index + 1}</span>
+          <div class="what">
+            <p>{parts(step.what).map((p) => (p.code ? <code>{p.value}</code> : p.value))}</p>
+            {step.note && <p class="step-note">{step.note}</p>}
+          </div>
+          <div class="meta">
+            <p class="protocol">
+              <span class="label">Protocol: </span>
+              {step.protocol}
+            </p>
+            <p class="state">
+              <span class="label">Status: </span>
+              <Status state={step.status} />
+            </p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<style>
+  .chain {
+    margin-block-start: var(--space-5);
+    border-block-end: 1px solid var(--line);
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .chain-head {
+    display: none;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 1.75rem minmax(0, 1fr);
+    gap: var(--space-1) var(--space-3);
+    padding-block: var(--space-4);
+    border-block-start: 1px solid var(--line);
+  }
+
+  .n {
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .what {
+    color: var(--strong);
+  }
+
+  .step-note,
+  .protocol,
+  .state {
+    color: var(--text);
+    font-size: 0.9375rem;
+  }
+
+  .step-note {
+    margin-block-start: var(--space-1);
+    color: var(--muted);
+  }
+
+  /* Narrow screens: protocol and status share one line below the sentence. */
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-5);
+    grid-column: 2;
+  }
+
+  .label {
+    color: var(--muted);
+  }
+
+  /* From here on the rows are table rows and the labels move into the head. */
+  @media (min-width: 46rem) {
+    .chain-head,
+    li {
+      display: grid;
+      grid-template-columns: 2.5rem minmax(0, 1fr) 8.5rem 7.5rem;
+      gap: var(--space-5);
+      align-items: baseline;
+    }
+
+    .chain-head {
+      padding-block-end: var(--space-2);
+    }
+
+    li {
+      padding-block: var(--space-3);
+    }
+
+    .meta {
+      display: contents;
+    }
+
+    .label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  }
+</style>
