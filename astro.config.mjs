@@ -22,6 +22,18 @@ export default defineConfig({
       locales: {
         root: { label: 'English', lang: 'en' },
       },
+      logo: {
+        // Placeholder until Kyro has a logo.
+        src: './src/assets/logo-placeholder.svg',
+        alt: '',
+      },
+      favicon: '/favicon.svg',
+      customCss: ['./src/styles/theme.css'],
+      components: {
+        // Dark by default instead of following the system preference.
+        ThemeProvider: './src/components/ThemeProvider.astro',
+        ThemeSelect: './src/components/ThemeSelect.astro',
+      },
       social: [
         {
           icon: 'github',

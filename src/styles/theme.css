@@ -1,0 +1,21 @@
+/*
+ * Kyro theme: Starlight's defaults with one accent color.
+ *
+ * The accent is a muted teal. Amber and red are reserved for warnings and
+ * destructive options in the generator, so the accent has to stay clearly
+ * apart from both. All pairings used for text meet WCAG AA (4.5:1).
+ */
+
+/* Dark theme, the default. */
+:root {
+  --sl-color-accent-low: hsl(184, 42%, 15%);
+  --sl-color-accent: hsl(184, 52%, 40%);
+  --sl-color-accent-high: hsl(184, 48%, 76%);
+}
+
+/* Light theme, used only when the visitor selects it. */
+:root[data-theme='light'] {
+  --sl-color-accent-high: hsl(186, 70%, 17%);
+  --sl-color-accent: hsl(186, 72%, 26%);
+  --sl-color-accent-low: hsl(184, 42%, 88%);
+}
