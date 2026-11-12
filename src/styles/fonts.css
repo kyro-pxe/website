@@ -1,0 +1,8 @@
+/*
+ * Typefaces, served from this site. Both are under the SIL Open Font
+ * License 1.1 and come from the pinned @fontsource packages.
+ * Archivo: variable in weight and width. IBM Plex Mono: two weights.
+ */
+@import '@fontsource-variable/archivo/wdth.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';

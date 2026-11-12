@@ -14,11 +14,11 @@
   Permissions-Policy: camera=(), geolocation=(), microphone=(), payment=(), usb=()
   Content-Security-Policy: default-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
 
-# The generator handles passwords. Its page loads scripts, styles and images
+# The generator handles passwords. Its page loads scripts, styles, fonts and images
 # from this site only, and its scripts cannot open a network connection.
 # src/data/csp.ts repeats this policy for the page's <meta> element.
 /generator/*
-  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
 
 # The site lives at kyro-pxe.sh. Keep the pages.dev addresses of the same
 # content out of search engines.

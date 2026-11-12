@@ -10,6 +10,7 @@ export const generatorPolicy = [
   "script-src 'self'",
   "style-src 'self'",
   "img-src 'self'",
+  "font-src 'self'",
   "connect-src 'none'",
   "base-uri 'none'",
   "form-action 'none'",
