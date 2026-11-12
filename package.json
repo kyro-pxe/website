@@ -1,0 +1,35 @@
+{
+  "name": "kyro-website",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Documentation site and autounattend.xml generator for Kyro",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://kyro-pxe.sh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyro-pxe/website.git"
+  },
+  "type": "module",
+  "packageManager": "pnpm@10.24.0",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "lint:md": "markdownlint-cli2",
+    "lint": "pnpm run check && pnpm run lint:md"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "0.42.11",
+    "astro": "7.4.11",
+    "sharp": "0.35.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "markdownlint-cli2": "0.24.1",
+    "typescript": "6.0.3"
+  }
+}

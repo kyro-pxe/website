@@ -1,0 +1,11 @@
+{
+  "globs": ["**/*.md", "**/*.mdx"],
+  "ignores": ["node_modules", "dist", ".astro", "LICENSES"],
+  "config": {
+    "default": true,
+    // Long lines are fine in tables and link-heavy text.
+    "MD013": false,
+    // Starlight renders the page title from frontmatter as the only h1.
+    "MD041": false
+  }
+}

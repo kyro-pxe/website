@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output and Astro's generated types
+dist/
+.astro/
+
+# Test output
+coverage/
+
+# Local environment and editor files
+.env
+.env.*
+!.env.example
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Logs
+*.log
+
+# Windows media and images must never be committed
+*.iso
+*.wim
+*.esd
