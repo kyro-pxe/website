@@ -1,6 +1,6 @@
 /*
- * Styles for the pages that do not use Starlight: home, generator, 404.
- * Starlight pages get the same tokens through starlight.css.
+ * Base styles of the standalone pages (home, generator, 404). Documentation
+ * pages are styled by Starlight through starlight.css. Tokens: tokens.css.
  */
 *,
 *::before,
@@ -18,7 +18,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font);
-  font-size: 1rem;
+  font-size: 1.0625rem;
   line-height: 1.6;
 }
 
@@ -27,37 +27,53 @@ h2,
 h3 {
   margin: 0;
   color: var(--strong);
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-h1 {
-  font-size: clamp(1.625rem, 1.2rem + 2vw, 2.375rem);
-  letter-spacing: -0.01em;
+  font-weight: 750;
+  /* Archivo's wide cut for headings, its normal width for text. */
+  font-stretch: 116%;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
   text-wrap: balance;
 }
 
+h1 {
+  font-size: clamp(2.375rem, 1.3rem + 5.2vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
 h2 {
-  font-size: 1.25rem;
+  font-size: clamp(1.75rem, 1.3rem + 2.2vw, 2.75rem);
+}
+
+h3 {
+  font-size: 1.125rem;
+  font-stretch: 108%;
+  line-height: 1.3;
+  letter-spacing: 0;
 }
 
 p,
 ul,
-ol {
+ol,
+dl,
+dd,
+figure {
   margin: 0;
 }
 
-code {
+code,
+pre {
   font-family: var(--font-mono);
-  font-size: 0.9375em;
+  font-size: 0.9em;
 }
 
 a {
   color: var(--strong);
-  text-decoration: underline;
+  text-decoration-line: underline;
   text-decoration-color: var(--accent);
   text-decoration-thickness: 0.09em;
-  text-underline-offset: 0.2em;
+  text-underline-offset: 0.22em;
 }
 
 a:hover {
@@ -66,7 +82,8 @@ a:hover {
 
 :focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 .sr-only {
@@ -78,10 +95,8 @@ a:hover {
   white-space: nowrap;
 }
 
-/* Page frame */
-
 .frame {
-  max-width: var(--page);
+  max-width: calc(var(--page) + 2 * var(--gutter));
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
@@ -89,114 +104,173 @@ a:hover {
 .skip {
   position: absolute;
   inset-block-start: var(--space-2);
-  inset-inline-start: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  background: var(--bg);
-  transform: translateY(-200%);
+  inset-inline-start: -100rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-control);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .skip:focus {
-  transform: none;
-}
-
-.site-header {
-  border-block-end: 1px solid var(--line);
-}
-
-main {
-  padding-block: var(--space-7) var(--space-8);
+  inset-inline-start: var(--space-2);
+  color: var(--on-accent);
 }
 
 .site-footer {
+  margin-block-start: var(--space-section);
   border-block-start: 1px solid var(--line);
-  padding-block: var(--space-5) var(--space-7);
-  color: var(--muted);
-  font-size: 0.875rem;
+  background: var(--surface);
 }
 
-.site-footer p + p {
-  margin-block-start: var(--space-2);
-}
+/* Text blocks */
 
-.site-footer a {
+.lede {
+  max-width: var(--measure);
   color: var(--text);
+  font-size: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
+  line-height: 1.5;
 }
 
-/* Content blocks */
-
-.prose {
+.copy {
   max-width: var(--measure);
 }
 
-.prose > * + * {
+.copy > * + * {
   margin-block-start: var(--space-4);
 }
 
-.prose > h1 + * {
+.copy > h2 + * {
   margin-block-start: var(--space-5);
 }
 
-.section {
-  margin-block-start: var(--space-8);
+.small {
+  color: var(--muted);
+  font-size: 0.9375rem;
 }
 
-.section > h2 + * {
-  margin-block-start: var(--space-3);
+/* Actions: one filled button per page at most, the rest outlined or links. */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
 }
 
-.lede {
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0 var(--space-5);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-control);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: var(--strong);
+  border-color: var(--strong);
+  color: var(--bg);
+}
+
+.button-outline {
+  border-color: var(--edge);
+  background: transparent;
   color: var(--strong);
-  font-size: 1.125rem;
 }
 
-.note {
+.button-outline:hover {
+  border-color: var(--accent);
+  background: transparent;
+  color: var(--accent);
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 600;
+}
+
+/* Page sections */
+
+.section {
+  margin-block-start: var(--space-section);
+}
+
+/* Two columns from a width where both stay readable. */
+.pair {
+  display: grid;
+  gap: var(--space-7) var(--space-8);
+}
+
+@media (min-width: 60rem) {
+  .pair {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .pair-top {
+    align-items: start;
+  }
+
+  /* The picture comes first in the source on narrow screens, second here. */
+  .pair-flip > :first-child {
+    order: 2;
+  }
+}
+
+/* A full-width band with its own background. */
+.band {
+  margin-block-start: var(--space-section);
+  padding-block: var(--space-section);
+  border-block: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.band + .site-footer {
+  margin-block-start: 0;
+  border-block-start: 0;
+  background: var(--bg);
+}
+
+/* A panel that holds a figure: chart, schematic or code. */
+.panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-panel);
+  background: var(--surface);
+}
+
+.band .panel {
+  background: var(--bg);
+}
+
+figcaption {
   color: var(--muted);
   font-size: 0.875rem;
 }
 
-.links {
-  padding: 0;
-  list-style: none;
+/* Pages that are only text: generator placeholder, 404. */
+.plain {
+  max-width: var(--measure);
+  padding-block-start: var(--space-8);
 }
 
-.links li + li {
-  margin-block-start: var(--space-2);
+.plain > * + * {
+  margin-block-start: var(--space-5);
 }
 
-.split {
-  display: grid;
-  gap: var(--space-7) var(--space-7);
-}
-
-@media (min-width: 52rem) {
-  .split {
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  }
-
-  .split > .section {
-    margin-block-start: var(--space-8);
-  }
-}
-
-@media (max-width: 51.999rem) {
-  .split {
-    margin-block-start: var(--space-8);
-  }
-
-  .split > .section {
-    margin-block-start: 0;
-  }
-}
-
-/* Links that stand alone need a comfortable target on touch screens. */
-@media (pointer: coarse) {
-  .links a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-  }
-
-  .links li + li {
-    margin-block-start: 0;
-  }
+.plain h1 {
+  font-size: clamp(1.625rem, 1rem + 3.2vw, 3.25rem);
+  overflow-wrap: anywhere;
 }

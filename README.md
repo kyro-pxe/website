@@ -46,22 +46,23 @@ with `pnpm astro telemetry disable` or by setting `ASTRO_TELEMETRY_DISABLED=1`.
 | `src/layouts/` | The layout of the standalone pages. |
 | `src/components/` | Shared parts (header, footer, status marker, boot chain). `starlight/` holds the overrides that make documentation pages use them. |
 | `src/data/` | Content that is data, such as the boot chain steps and their status. |
-| `src/styles/` | `tokens.css` (colours, fonts, spacing), `site.css` (standalone pages), `starlight.css` (maps the tokens onto Starlight). |
+| `src/styles/` | `tokens.css` (colours, fonts, spacing), `fonts.css` (typefaces), `site.css` (standalone pages), `state.css` (status shapes), `starlight.css` (maps the tokens onto Starlight). |
 | `public/` | Files copied to the site root unchanged, among them `_headers` with the response headers. |
 | `tests/` | Tests that are not about one source file, such as the checks of the headers and of the built pages. |
 | `DESIGN.md` | The design direction and the reason for each visual decision. Read it before changing how the site looks. |
 | `docs/` | Documents about this repository, such as decision records. Not published on the site. |
 | `astro.config.mjs` | Site configuration and sidebar. |
 
-Kyro has no logo yet. The header shows the name as text and the favicon shows
-the initial. `DESIGN.md` says where a logo goes once one exists.
+Kyro has no logo yet. The mark in the header and the favicon are a draft.
+`DESIGN.md` says which files a real logo replaces.
 
 The status of each boot step on the home page is kept by hand in
 `src/data/boot-chain.ts`. The roadmap in the Kyro repository is authoritative.
 
 The site is built with [Astro](https://astro.build) and
-[Starlight](https://starlight.astro.build) as static files. It loads no
-third-party scripts, fonts or other resources and contains no tracking.
+[Starlight](https://starlight.astro.build) as static files. It contains no
+tracking and loads nothing from other servers; the typefaces are served from
+the site itself.
 
 ## Deployment
 
@@ -115,6 +116,12 @@ This repository uses two licenses:
   Attribution 4.0 International License (CC BY 4.0). See
   [LICENSE-docs](LICENSE-docs). This covers the pages in `src/content/docs/`
   and the documents in `docs/`.
+
+The built site also contains two typefaces that are not part of this
+repository: Archivo (Copyright 2020 The Archivo Project Authors) and IBM Plex
+Mono (Copyright 2017 IBM Corp.). Both are licensed under the SIL Open Font
+License 1.1 and come from the `@fontsource` packages pinned in
+`package.json`, which include the license text.
 
 Windows is a trademark of the Microsoft group of companies. Kyro is not
 affiliated with or endorsed by Microsoft, and this repository contains no

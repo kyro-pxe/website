@@ -38,7 +38,11 @@ export default defineConfig({
         root: { label: 'English', lang: 'en' },
       },
       favicon: '/favicon.svg',
-      customCss: ['./src/styles/tokens.css', './src/styles/starlight.css'],
+      customCss: [
+        './src/styles/fonts.css',
+        './src/styles/tokens.css',
+        './src/styles/starlight.css',
+      ],
       components: {
         Header: './src/components/starlight/Header.astro',
         Footer: './src/components/starlight/Footer.astro',
@@ -51,7 +55,7 @@ export default defineConfig({
       // line when the first documentation pages exist.
       pagefind: false,
       expressiveCode: {
-        styleOverrides: { borderRadius: '0' },
+        styleOverrides: { borderRadius: '10px' },
       },
       social: [
         {

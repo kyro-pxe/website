@@ -5,18 +5,19 @@
 :root {
   color-scheme: dark;
 
-  --bg: hsl(200 12% 8%);
-  --surface: hsl(200 10% 12%);
-  --line: hsl(200 8% 21%);
-  --edge: hsl(200 6% 46%);
-  --text: hsl(200 10% 84%);
-  --strong: hsl(200 15% 96%);
-  --muted: hsl(200 6% 64%);
-  --accent: hsl(188 45% 62%);
+  --bg: #0a0e14;
+  --surface: #111822;
+  --raised: #1a2331;
+  --line: #263244;
+  --edge: #6f7e94;
+  --text: #c5cfdc;
+  --strong: #f3f6fa;
+  --muted: #94a1b3;
+  --accent: #5fd6f2;
+  --on-accent: #04141b;
 
-  /* Windows fonts first: that is the system the readers administer. */
-  --font: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', 'Noto Sans', sans-serif;
-  --font-mono: 'Cascadia Mono', Consolas, ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', monospace;
+  --font: 'Archivo Variable', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Cascadia Mono', Consolas, ui-monospace, Menlo, monospace;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -26,24 +27,29 @@
   --space-6: 2rem;
   --space-7: 3rem;
   --space-8: 4.5rem;
+  /* Distance between the sections of a page. */
+  --space-section: clamp(4rem, 2.5rem + 6vw, 7.5rem);
 
   --gutter: var(--space-4);
-  --measure: 42rem;
-  --page: 64rem;
-  --radius-control: 3px;
+  --measure: 38rem;
+  --page: 72rem;
+  --radius-control: 6px;
+  --radius-panel: 10px;
 }
 
 :root[data-theme='light'] {
   color-scheme: light;
 
-  --bg: hsl(200 20% 98%);
-  --surface: hsl(200 16% 94%);
-  --line: hsl(200 10% 84%);
-  --edge: hsl(200 6% 44%);
-  --text: hsl(200 12% 20%);
-  --strong: hsl(200 20% 8%);
-  --muted: hsl(200 6% 36%);
-  --accent: hsl(190 75% 24%);
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --raised: #e9eef5;
+  --line: #d2dae6;
+  --edge: #66758a;
+  --text: #2b3545;
+  --strong: #0a111b;
+  --muted: #556275;
+  --accent: #0a6885;
+  --on-accent: #ffffff;
 }
 
 @media (min-width: 40rem) {

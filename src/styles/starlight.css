@@ -7,7 +7,7 @@
   --sl-font-mono: var(--font-mono);
 
   --sl-color-white: var(--strong);
-  --sl-color-gray-1: hsl(200 12% 92%);
+  --sl-color-gray-1: #e3e9f1;
   --sl-color-gray-2: var(--text);
   --sl-color-gray-3: var(--muted);
   --sl-color-gray-4: var(--edge);
@@ -15,8 +15,8 @@
   --sl-color-gray-6: var(--surface);
   --sl-color-black: var(--bg);
 
-  --sl-color-accent-low: hsl(190 30% 16%);
-  --sl-color-accent: hsl(188 45% 42%);
+  --sl-color-accent-low: #10303a;
+  --sl-color-accent: #2a9bb8;
   --sl-color-accent-high: var(--accent);
 
   --sl-color-bg-nav: var(--bg);
@@ -28,18 +28,18 @@
 
 :root[data-theme='light'] {
   --sl-color-white: var(--strong);
-  --sl-color-gray-1: hsl(200 14% 14%);
+  --sl-color-gray-1: #1b2533;
   --sl-color-gray-2: var(--text);
   --sl-color-gray-3: var(--muted);
   --sl-color-gray-4: var(--edge);
-  --sl-color-gray-5: hsl(200 8% 74%);
+  --sl-color-gray-5: #b4bfce;
   --sl-color-gray-6: var(--line);
   --sl-color-gray-7: var(--surface);
   --sl-color-black: var(--bg);
 
-  --sl-color-accent-high: hsl(190 75% 16%);
+  --sl-color-accent-high: #06465a;
   --sl-color-accent: var(--accent);
-  --sl-color-accent-low: hsl(190 35% 88%);
+  --sl-color-accent-low: #d5edf4;
 
   --sl-color-bg-nav: var(--bg);
   --sl-color-bg-sidebar: var(--bg);
@@ -70,7 +70,6 @@
   background-color: transparent;
 }
 
-/* Controls are slightly rounded, containers are square. */
 .sl-link-button,
 site-search button,
 starlight-theme-select select {
@@ -82,13 +81,11 @@ starlight-theme-select select {
   color: var(--muted);
 }
 
-/* Heading sizes match the standalone pages instead of Starlight's display sizes. */
-:root {
-  --sl-text-h1: clamp(1.625rem, 1.2rem + 2vw, 2.375rem);
-  --sl-text-h2: 1.5rem;
-  --sl-text-h3: 1.25rem;
-  --sl-text-h4: 1.125rem;
-  --sl-text-h5: 1rem;
+/* Headings use Archivo's wide cut, as on the standalone pages. */
+.sl-markdown-content :is(h1, h2, h3, h4),
+h1#_top {
+  font-stretch: 112%;
+  letter-spacing: -0.01em;
 }
 
 /* The current page in the sidebar: weight and accent text, no filled block. */
@@ -126,7 +123,7 @@ starlight-theme-select select {
  */
 @media (max-width: 49.999rem) {
   :root[data-has-sidebar] .site-nav nav,
-  :root[data-has-sidebar] .site-nav .theme-control {
+  :root[data-has-sidebar] .docs-header .theme-control {
     display: none;
   }
 }

@@ -1,57 +1,59 @@
 ---
 // The site header's content, shared by the standalone pages and Starlight.
-// It lists only destinations that exist. There is no logo yet: the name is
-// set as text. When a logo exists, it replaces the text in the first link.
-import ThemeControl from './ThemeControl.astro';
+// It lists only destinations that exist.
+import Mark from './Mark.astro';
 ---
 
 <div class="site-nav">
-  <a class="wordmark" href="/" translate="no">Kyro</a>
+  <a class="home" href="/" translate="no">
+    <Mark />
+    <span>Kyro</span>
+  </a>
   <nav aria-label="Site">
-    <a href="https://github.com/kyro-pxe/kyro">Source</a>
+    <a href="/generator/">Generator</a>
+    <a href="https://github.com/kyro-pxe/kyro">GitHub</a>
   </nav>
-  <ThemeControl />
 </div>
 
 <style>
   .site-nav {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--space-5);
-    min-height: 3.5rem;
+    min-height: 4.5rem;
   }
 
-  .wordmark {
-    margin-inline-end: auto;
+  .home {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 2.75rem;
     color: var(--strong);
-    font-size: 1.125rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    font-size: 1.375rem;
+    font-weight: 800;
+    font-stretch: 116%;
+    letter-spacing: -0.02em;
     text-decoration: none;
   }
 
   nav {
     display: flex;
-    gap: var(--space-5);
-    font-size: 0.9375rem;
+    gap: var(--space-2) var(--space-5);
   }
 
   nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
     color: var(--text);
+    font-size: 1rem;
+    font-weight: 550;
     text-decoration: none;
   }
 
   nav a:hover,
-  .wordmark:hover {
+  .home:hover {
     color: var(--accent);
-  }
-
-  @media (pointer: coarse) {
-    .wordmark,
-    nav a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 2.75rem;
-    }
   }
 </style>

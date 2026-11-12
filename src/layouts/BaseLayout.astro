@@ -2,6 +2,7 @@
 // Layout for the pages that are not documentation: home, generator, 404.
 // It contains no inline scripts or styles, so that a page using it can carry
 // a strict Content Security Policy.
+import '../styles/fonts.css';
 import '../styles/tokens.css';
 import '../styles/site.css';
 import SiteNav from '../components/SiteNav.astro';
@@ -44,7 +45,7 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
     <header class="site-header">
       <div class="frame"><SiteNav /></div>
     </header>
-    <main id="main" class="frame">
+    <main id="main">
       <slot />
     </main>
     <footer class="site-footer">

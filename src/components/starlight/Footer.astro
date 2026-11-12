@@ -1,11 +1,11 @@
 ---
 // Starlight's footer (edit link, pagination) followed by the site-wide notes.
 import Default from '@astrojs/starlight/components/Footer.astro';
-import SiteFooter from '../SiteFooter.astro';
+import SiteNotes from '../SiteNotes.astro';
 ---
 
 <Default><slot /></Default>
-<div class="site-notes"><SiteFooter /></div>
+<div class="site-notes"><SiteNotes /></div>
 
 <style>
   .site-notes {

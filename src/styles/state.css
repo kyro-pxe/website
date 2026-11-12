@@ -1,0 +1,23 @@
+/*
+ * The four roadmap states as a shape, so that colour is never the only
+ * signal: outline (planned), half filled (in progress), filled (working),
+ * filled with a ring (tested). Used by the status marker and the boot chart.
+ */
+.state-shape {
+  border: 1.5px solid var(--accent);
+  border-radius: 2px;
+}
+
+.state-shape[data-state='in-progress'] {
+  background: linear-gradient(to right, var(--accent) 50%, transparent 50%);
+}
+
+.state-shape[data-state='working'],
+.state-shape[data-state='tested'] {
+  background: var(--accent);
+}
+
+.state-shape[data-state='tested'] {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 2px;
+}

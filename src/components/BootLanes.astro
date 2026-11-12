@@ -1,0 +1,180 @@
+---
+// The steps from power-on to Windows Setup as a chart: one row per step,
+// one column per protocol, a bar where the step uses the protocol. The bar's
+// fill is the status of the step, so the chart fills in as Kyro gets built.
+import '../styles/state.css';
+import { bootChain, lanes } from '../data/boot-chain';
+import { statusLabel, type Status } from '../data/status';
+
+const states: Status[] = ['planned', 'in-progress', 'working', 'tested'];
+---
+
+<figure class="panel lanes">
+  <table>
+    <caption>From power-on to Windows Setup</caption>
+    <thead>
+      <tr>
+        <th scope="col" class="step-head">Step</th>
+        {lanes.map((lane) => <th scope="col" class="lane-head">{lane}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {
+        bootChain.map((step, index) => (
+          <tr>
+            <th scope="row">
+              <span class="n">{index + 1}</span>
+              <span class="what">
+                {step.what}
+                <span class="sr-only">, {statusLabel[step.status].toLowerCase()}</span>
+              </span>
+            </th>
+            {lanes.map((lane) => (
+              <td>
+                {step.lanes.includes(lane) && (
+                  <span class="bar state-shape" data-state={step.status}>
+                    <span class="sr-only">{lane}</span>
+                  </span>
+                )}
+              </td>
+            ))}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+  <figcaption>
+    <ul class="key" aria-label="How to read the bars">
+      {
+        states.map((state) => (
+          <li>
+            <span class="key-shape state-shape" data-state={state} aria-hidden="true" />
+            {statusLabel[state]}
+          </li>
+        ))
+      }
+    </ul>
+  </figcaption>
+</figure>
+
+<style>
+  .lanes {
+    padding: var(--space-4);
+  }
+
+  @media (min-width: 30rem) {
+    .lanes {
+      padding: var(--space-5);
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  caption {
+    padding-block-end: var(--space-4);
+    color: var(--strong);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    font-stretch: 108%;
+    text-align: start;
+  }
+
+  thead th {
+    padding-block-end: var(--space-2);
+    color: var(--muted);
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  .step-head {
+    text-align: start;
+  }
+
+  .lane-head {
+    width: 2.375rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-align: center;
+  }
+
+  @media (min-width: 30rem) {
+    .lane-head {
+      width: 3.75rem;
+      font-size: 0.8125rem;
+    }
+  }
+
+  tbody th {
+    display: flex;
+    gap: var(--space-3);
+    padding-block: var(--space-3);
+    padding-inline-end: var(--space-2);
+    color: var(--strong);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: start;
+  }
+
+  tbody tr {
+    border-block-start: 1px solid var(--line);
+  }
+
+  .n {
+    flex: none;
+    width: 1ch;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+
+  /* Each protocol column carries a dashed guide from top to bottom. */
+  td {
+    position: relative;
+    padding: 0;
+    vertical-align: middle;
+  }
+
+  td::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 50%;
+    border-inline-start: 1px dashed var(--line);
+  }
+
+  .bar {
+    position: relative;
+    display: block;
+    height: 1.125rem;
+    margin-inline: var(--space-1);
+    /* Covers the guide behind an outlined bar. */
+    background-color: var(--surface);
+  }
+
+  .key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    margin-block-start: var(--space-4);
+    padding: var(--space-4) 0 0;
+    border-block-start: 1px solid var(--line);
+    list-style: none;
+  }
+
+  .key li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .key-shape {
+    width: 1.25rem;
+    height: 0.625rem;
+  }
+</style>

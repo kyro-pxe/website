@@ -1,7 +1,25 @@
 ---
 // Replaces Starlight's header so that documentation pages and the standalone
-// pages share one header.
+// pages share one header. The theme choice sits here because documentation
+// pages do not have the standalone footer.
 import SiteNav from '../SiteNav.astro';
+import ThemeControl from '../ThemeControl.astro';
 ---
 
-<SiteNav />
+<div class="docs-header">
+  <SiteNav />
+  <ThemeControl />
+</div>
+
+<style>
+  .docs-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    width: 100%;
+  }
+
+  .docs-header > :global(.site-nav) {
+    flex: 1;
+  }
+</style>

@@ -1,0 +1,113 @@
+---
+// One image with the entries the boot menu is meant to offer for it: one per
+// fitting profile, and always one without a profile. The names are examples.
+---
+
+<figure class="panel menu">
+  <figcaption>Example: one image, three entries in the boot menu</figcaption>
+  <div class="tree">
+    <p class="node image">
+      <span class="kind">Image</span>
+      <strong>Windows 11 ISO</strong>
+      <span class="detail">Several gigabytes. Stored once, not modified.</span>
+    </p>
+    <ul>
+      <li class="node">
+        <span class="kind">Profile</span>
+        <strong>Office PC</strong>
+        <span class="detail">Answer file. Setup runs without questions.</span>
+      </li>
+      <li class="node">
+        <span class="kind">Profile</span>
+        <strong>Workshop bench</strong>
+        <span class="detail">Another answer file for the same image.</span>
+      </li>
+      <li class="node">
+        <span class="kind">No profile</span>
+        <strong>Interactive</strong>
+        <span class="detail">Setup asks its questions as usual.</span>
+      </li>
+    </ul>
+  </div>
+</figure>
+
+<style>
+  .menu {
+    padding: var(--space-4);
+  }
+
+  @media (min-width: 30rem) {
+    .menu {
+      padding: var(--space-5);
+    }
+  }
+
+  .tree {
+    margin-block-start: var(--space-4);
+  }
+
+  .node {
+    display: grid;
+    gap: 0.125rem;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-control);
+    background: var(--raised);
+  }
+
+  .image {
+    border-color: var(--accent);
+  }
+
+  .kind {
+    color: var(--muted);
+    font-size: 0.8125rem;
+  }
+
+  strong {
+    color: var(--strong);
+    font-weight: 650;
+  }
+
+  .detail {
+    font-size: 0.9375rem;
+  }
+
+  /* Each entry hangs off a trunk that runs down from the image. */
+  ul {
+    display: grid;
+    gap: var(--space-3);
+    margin-inline-start: var(--space-5);
+    padding: var(--space-3) 0 0 var(--space-5);
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+  }
+
+  li::before,
+  li::after {
+    content: '';
+    position: absolute;
+    inset-inline-start: calc(-1 * var(--space-5));
+  }
+
+  /* The branch to this entry. */
+  li::before {
+    inset-block-start: 50%;
+    width: var(--space-5);
+    border-block-start: 1.5px solid var(--edge);
+  }
+
+  /* This entry's piece of the trunk. It reaches up across the gap, and on
+     the last entry it stops at the branch. */
+  li::after {
+    inset-block: calc(-1 * var(--space-3)) 0;
+    border-inline-start: 1.5px solid var(--edge);
+  }
+
+  li:last-child::after {
+    inset-block-end: 50%;
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+// A fragment of a real answer file, to show what the generator is going to
+// write. Element and attribute names are from Microsoft's unattend reference
+// (Microsoft-Windows-Shell-Setup, pass "specialize"). The part in double
+// braces is a Kyro token.
+type Part = [kind: 'p' | 'tag' | 'attr' | 'val' | 'text' | 'token', value: string];
+
+const lines: Part[][] = [
+  [['p', '<'], ['tag', 'settings'], ['attr', ' pass'], ['p', '='], ['val', '"specialize"'], ['p', '>']],
+  [['p', '  <'], ['tag', 'component'], ['attr', ' name'], ['p', '='], ['val', '"Microsoft-Windows-Shell-Setup"']],
+  [['attr', '      processorArchitecture'], ['p', '='], ['val', '"amd64"']],
+  [['attr', '      publicKeyToken'], ['p', '='], ['val', '"31bf3856ad364e35"']],
+  [['attr', '      language'], ['p', '='], ['val', '"neutral"']],
+  [['attr', '      versionScope'], ['p', '='], ['val', '"nonSxS"'], ['p', '>']],
+  [['p', '    <'], ['tag', 'ComputerName'], ['p', '>'], ['text', 'PC-'], ['token', '{{serial:12}}'], ['p', '</'], ['tag', 'ComputerName'], ['p', '>']],
+  [['p', '    <'], ['tag', 'TimeZone'], ['p', '>'], ['text', 'W. Europe Standard Time'], ['p', '</'], ['tag', 'TimeZone'], ['p', '>']],
+  [['p', '  </'], ['tag', 'component'], ['p', '>']],
+  [['p', '</'], ['tag', 'settings'], ['p', '>']],
+];
+---
+
+<figure class="panel sample">
+  <figcaption>Example: part of an <code>autounattend.xml</code></figcaption>
+  <pre tabindex="0" aria-label="Example answer file fragment"><code>{lines.map((line) => <span class="line">{line.map(([kind, value]) => <span class={kind}>{value}</span>)}{'\n'}</span>)}</code></pre>
+  <p class="legend">
+    <span class="token">{'{{serial:12}}'}</span> is a Kyro token. Kyro is meant to replace it with
+    the serial number of the PC that asks for the file, cut to 12 characters.
+  </p>
+</figure>
+
+<style>
+  .sample {
+    overflow: hidden;
+  }
+
+  figcaption {
+    padding: var(--space-3) var(--space-5);
+    border-block-end: 1px solid var(--line);
+  }
+
+  pre {
+    margin: 0;
+    padding: var(--space-5);
+    overflow-x: auto;
+    color: var(--text);
+    font-size: 0.8125rem;
+    line-height: 1.75;
+  }
+
+  @media (min-width: 30rem) {
+    pre {
+      font-size: 0.875rem;
+    }
+  }
+
+  code {
+    font-size: inherit;
+  }
+
+  .p,
+  .attr {
+    color: var(--muted);
+  }
+
+  .tag {
+    color: var(--accent);
+  }
+
+  .text {
+    color: var(--strong);
+  }
+
+  .token {
+    padding: 0.1em 0.3em;
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    color: var(--strong);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+  }
+
+  pre .token {
+    font-size: inherit;
+  }
+
+  .legend {
+    padding: var(--space-4) var(--space-5);
+    border-block-start: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+</style>

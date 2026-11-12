@@ -1,15 +1,118 @@
 ---
-// Legal and licence notes shown on every page.
+// Footer of the standalone pages: where the project lives, the theme choice
+// and the legal notes.
+import Mark from './Mark.astro';
+import SiteNotes from './SiteNotes.astro';
+import ThemeControl from './ThemeControl.astro';
 ---
 
-<p>
-  Kyro is not affiliated with or endorsed by Microsoft. Windows is a trademark of the Microsoft
-  group of companies. This site contains no Microsoft software, files or logos.
-</p>
-<p>
-  Site code is licensed under the{' '}
-  <a href="https://github.com/kyro-pxe/website/blob/main/LICENSE">GPL, version 3 or later</a>,
-  documentation under{' '}
-  <a href="https://github.com/kyro-pxe/website/blob/main/LICENSE-docs">CC BY 4.0</a>. The site
-  sets no cookies and loads nothing from other servers.
-</p>
+<div class="footer">
+  <div class="about">
+    <p class="name" translate="no"><Mark /> Kyro</p>
+    <p>An open-source PXE server for installing Windows 11 over the network. In early development.</p>
+    <ThemeControl />
+  </div>
+
+  <nav aria-label="Project">
+    <h2>Project</h2>
+    <ul>
+      <li><a href="https://github.com/kyro-pxe/kyro">Kyro source code</a></li>
+      <li><a href="https://github.com/kyro-pxe/kyro/blob/main/docs/ROADMAP.md">Roadmap</a></li>
+      <li><a href="https://github.com/kyro-pxe/kyro/blob/main/docs/architecture.md">Architecture</a></li>
+      <li><a href="https://github.com/kyro-pxe/kyro/blob/main/docs/security-model.md">Security model</a></li>
+    </ul>
+  </nav>
+
+  <nav aria-label="This site">
+    <h2>This site</h2>
+    <ul>
+      <li><a href="/generator/">Generator</a></li>
+      <li><a href="https://github.com/kyro-pxe/website">Website source code</a></li>
+    </ul>
+  </nav>
+
+  <div class="notes"><SiteNotes /></div>
+</div>
+
+<style>
+  .footer {
+    display: grid;
+    gap: var(--space-6) var(--space-7);
+    padding-block: var(--space-7) var(--space-6);
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 46rem) {
+    .footer {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .notes {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .about {
+    display: grid;
+    gap: var(--space-3);
+    justify-items: start;
+    max-width: 24rem;
+  }
+
+  .name {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--strong);
+    font-size: 1.25rem;
+    font-weight: 800;
+    font-stretch: 116%;
+  }
+
+  h2 {
+    color: var(--muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-stretch: 100%;
+    letter-spacing: 0;
+  }
+
+  ul {
+    margin-block-start: var(--space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  li a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  li a:hover {
+    color: var(--accent);
+  }
+
+  @media (pointer: coarse) {
+    li a {
+      min-height: 2.75rem;
+    }
+  }
+
+  .notes {
+    padding-block-start: var(--space-5);
+    border-block-start: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  .notes :global(p + p) {
+    margin-block-start: var(--space-2);
+  }
+
+  .notes :global(a) {
+    color: var(--text);
+  }
+</style>
