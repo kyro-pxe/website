@@ -471,8 +471,9 @@ bundled module script instead of an Astro `client:*` directive. Both follow
 from the strict Content Security Policy that step 5 requires:
 
 - A Starlight page carries inline scripts and inline styles (theme switch,
-  sidebar state, search). The current placeholder page has ten inline
-  scripts and sixteen inline `style` attributes. A policy without
+  sidebar state, search). The first placeholder for `/generator`, which was a
+  Starlight page, had ten inline scripts and sixteen inline `style`
+  attributes. A policy without
   `'unsafe-inline'` would need a hash for each script, cannot allow the
   style attributes at all, and the search would need network access.
 - Astro's `client:*` directives add an inline bootstrap script and an inline
