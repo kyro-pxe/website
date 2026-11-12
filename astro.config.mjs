@@ -34,6 +34,7 @@ export default defineConfig({
         ThemeProvider: './src/components/ThemeProvider.astro',
         ThemeSelect: './src/components/ThemeSelect.astro',
       },
+      sidebar: [{ label: 'Generator (planned)', link: '/generator/' }],
       social: [
         {
           icon: 'github',
