@@ -20,7 +20,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "lint:md": "markdownlint-cli2",
-    "lint": "pnpm run check && pnpm run lint:md"
+    "lint": "pnpm run check && pnpm run lint:md",
+    "test": "vitest run"
   },
   "dependencies": {
     "@astrojs/starlight": "0.42.11",
@@ -29,7 +30,9 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
+    "@types/node": "24.19.2",
     "markdownlint-cli2": "0.24.1",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "vitest": "5.1.0"
   }
 }
