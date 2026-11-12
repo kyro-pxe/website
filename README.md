@@ -59,25 +59,29 @@ third-party scripts, fonts or other resources and contains no tracking.
 
 The site is static. `pnpm build` writes it to `dist/`.
 
-**GitHub Pages (primary).** The workflow
-[.github/workflows/deploy.yml](.github/workflows/deploy.yml) builds and
-deploys on every push to `main`. One-time setup in the repository settings:
+**Cloudflare Pages.** The repository is connected through Cloudflare's Git
+integration, which builds and publishes on every push. This repository has no
+deploy workflow. Settings of the Pages project:
 
-1. Under *Pages*, set the source to *GitHub Actions*.
-2. Under *Pages*, set the custom domain to `kyro-pxe.sh` and, once the
-   certificate is issued, enable *Enforce HTTPS*.
-3. Point the DNS records of `kyro-pxe.sh` to GitHub Pages as described in
-   GitHub's documentation on custom domains.
+| Setting | Value |
+| ------- | ----- |
+| Production branch | `main` |
+| Build command | `pnpm build` |
+| Build output directory | `dist` |
+| Variable `PNPM_VERSION` | The pnpm version from the `packageManager` field of `package.json`. Cloudflare does not read that field. |
+| Variable `ASTRO_TELEMETRY_DISABLED` | `1` |
 
-`public/CNAME` records the domain in the repository. With deployments from
-GitHub Actions, the domain setting in step 2 is what takes effect.
+Cloudflare takes the Node.js version from `.node-version` and the response
+headers from `public/_headers`. The domain `kyro-pxe.sh` is added under
+*Custom domains* in the Pages project.
 
-**Cloudflare Pages (alternative).** Nothing in the build depends on GitHub.
-Use the build command `pnpm build` and the output directory `dist`. The
-Node.js version comes from `.node-version`. `public/_headers` sets response
-headers there. For preview deployments, set the environment variable
-`SITE_URL` to the preview address so that canonical links and the sitemap
-match.
+**Moving to another host.** Nothing in the build depends on Cloudflare, so
+any static file server can serve `dist/`. Two things need attention:
+
+- `public/_headers` is a Cloudflare format. Another server has to send the
+  same headers from its own configuration.
+- If the address changes, set the environment variable `SITE_URL` for the
+  build so that canonical links and the sitemap match.
 
 ## Contributing
 

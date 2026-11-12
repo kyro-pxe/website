@@ -2,8 +2,8 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-// The canonical URL. Override with SITE_URL for preview deployments
-// (for example on Cloudflare Pages), so sitemap and canonical links match.
+// The canonical URL. Set SITE_URL when the site is served from another
+// address, so that canonical links and the sitemap match.
 const site = process.env.SITE_URL ?? 'https://kyro-pxe.sh';
 
 export default defineConfig({
