@@ -45,6 +45,30 @@ The site is built with [Astro](https://astro.build) and
 [Starlight](https://starlight.astro.build) as static files. It loads no
 third-party scripts, fonts or other resources and contains no tracking.
 
+## Deployment
+
+The site is static. `pnpm build` writes it to `dist/`.
+
+**GitHub Pages (primary).** The workflow
+[.github/workflows/deploy.yml](.github/workflows/deploy.yml) builds and
+deploys on every push to `main`. One-time setup in the repository settings:
+
+1. Under *Pages*, set the source to *GitHub Actions*.
+2. Under *Pages*, set the custom domain to `kyro-pxe.sh` and, once the
+   certificate is issued, enable *Enforce HTTPS*.
+3. Point the DNS records of `kyro-pxe.sh` to GitHub Pages as described in
+   GitHub's documentation on custom domains.
+
+`public/CNAME` records the domain in the repository. With deployments from
+GitHub Actions, the domain setting in step 2 is what takes effect.
+
+**Cloudflare Pages (alternative).** Nothing in the build depends on GitHub.
+Use the build command `pnpm build` and the output directory `dist`. The
+Node.js version comes from `.node-version`. `public/_headers` sets response
+headers there. For preview deployments, set the environment variable
+`SITE_URL` to the preview address so that canonical links and the sitemap
+match.
+
 ## Contributing
 
 Commits follow [Conventional Commits](https://www.conventionalcommits.org/)

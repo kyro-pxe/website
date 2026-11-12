@@ -1,0 +1,6 @@
+# Response headers for Cloudflare Pages. GitHub Pages ignores this file and
+# cannot set custom headers.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: no-referrer
