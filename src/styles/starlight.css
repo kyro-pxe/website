@@ -1,0 +1,132 @@
+/*
+ * Maps the design tokens (tokens.css, DESIGN.md) onto Starlight, so that
+ * documentation pages look like the rest of the site.
+ */
+:root {
+  --sl-font: var(--font);
+  --sl-font-mono: var(--font-mono);
+
+  --sl-color-white: var(--strong);
+  --sl-color-gray-1: hsl(200 12% 92%);
+  --sl-color-gray-2: var(--text);
+  --sl-color-gray-3: var(--muted);
+  --sl-color-gray-4: var(--edge);
+  --sl-color-gray-5: var(--line);
+  --sl-color-gray-6: var(--surface);
+  --sl-color-black: var(--bg);
+
+  --sl-color-accent-low: hsl(190 30% 16%);
+  --sl-color-accent: hsl(188 45% 42%);
+  --sl-color-accent-high: var(--accent);
+
+  --sl-color-bg-nav: var(--bg);
+  --sl-color-bg-sidebar: var(--bg);
+  --sl-color-hairline: var(--line);
+  --sl-color-hairline-light: var(--line);
+  --sl-color-hairline-shade: var(--line);
+}
+
+:root[data-theme='light'] {
+  --sl-color-white: var(--strong);
+  --sl-color-gray-1: hsl(200 14% 14%);
+  --sl-color-gray-2: var(--text);
+  --sl-color-gray-3: var(--muted);
+  --sl-color-gray-4: var(--edge);
+  --sl-color-gray-5: hsl(200 8% 74%);
+  --sl-color-gray-6: var(--line);
+  --sl-color-gray-7: var(--surface);
+  --sl-color-black: var(--bg);
+
+  --sl-color-accent-high: hsl(190 75% 16%);
+  --sl-color-accent: var(--accent);
+  --sl-color-accent-low: hsl(190 35% 88%);
+
+  --sl-color-bg-nav: var(--bg);
+  --sl-color-bg-sidebar: var(--bg);
+  --sl-color-hairline: var(--line);
+  --sl-color-hairline-light: var(--line);
+  --sl-color-hairline-shade: var(--line);
+}
+
+/* Links: text colour with an accent underline, as on the standalone pages. */
+.sl-markdown-content a:not(:where(.not-content *)) {
+  color: var(--strong);
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+.sl-markdown-content a:hover:not(:where(.not-content *)) {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Notices: a full hairline and the label. No stripe, no fill. */
+.starlight-aside {
+  border: 1px solid var(--sl-color-asides-border);
+  background-color: transparent;
+}
+
+/* Controls are slightly rounded, containers are square. */
+.sl-link-button,
+site-search button,
+starlight-theme-select select {
+  border-radius: var(--radius-control);
+}
+
+/* Heading anchors are a tool, not an accent. */
+.sl-anchor-link {
+  color: var(--muted);
+}
+
+/* Heading sizes match the standalone pages instead of Starlight's display sizes. */
+:root {
+  --sl-text-h1: clamp(1.625rem, 1.2rem + 2vw, 2.375rem);
+  --sl-text-h2: 1.5rem;
+  --sl-text-h3: 1.25rem;
+  --sl-text-h4: 1.125rem;
+  --sl-text-h5: 1rem;
+}
+
+/* The current page in the sidebar: weight and accent text, no filled block. */
+.sidebar-content a[aria-current='page'],
+.sidebar-content a[aria-current='page']:hover,
+.sidebar-content a[aria-current='page']:focus {
+  background-color: transparent;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Notices: the label carries the meaning, so no icon and no tinted title. */
+.starlight-aside__icon {
+  display: none;
+}
+
+.starlight-aside__title {
+  color: var(--strong);
+}
+
+/* Site-wide notes below Starlight's footer. */
+.site-notes a {
+  color: var(--text);
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+.site-notes a:hover {
+  color: var(--accent);
+}
+
+/*
+ * On narrow screens Starlight shows its menu button in the header and the
+ * theme choice inside the menu. Keep the header to the name there.
+ */
+@media (max-width: 49.999rem) {
+  :root[data-has-sidebar] .site-nav nav,
+  :root[data-has-sidebar] .site-nav .theme-control {
+    display: none;
+  }
+}

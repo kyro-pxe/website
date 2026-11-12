@@ -1,0 +1,57 @@
+---
+// The site header's content, shared by the standalone pages and Starlight.
+// It lists only destinations that exist. There is no logo yet: the name is
+// set as text. When a logo exists, it replaces the text in the first link.
+import ThemeControl from './ThemeControl.astro';
+---
+
+<div class="site-nav">
+  <a class="wordmark" href="/" translate="no">Kyro</a>
+  <nav aria-label="Site">
+    <a href="https://github.com/kyro-pxe/kyro">Source</a>
+  </nav>
+  <ThemeControl />
+</div>
+
+<style>
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    min-height: 3.5rem;
+  }
+
+  .wordmark {
+    margin-inline-end: auto;
+    color: var(--strong);
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  nav {
+    display: flex;
+    gap: var(--space-5);
+    font-size: 0.9375rem;
+  }
+
+  nav a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  nav a:hover,
+  .wordmark:hover {
+    color: var(--accent);
+  }
+
+  @media (pointer: coarse) {
+    .wordmark,
+    nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.75rem;
+    }
+  }
+</style>

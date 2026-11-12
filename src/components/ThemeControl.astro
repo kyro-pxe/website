@@ -1,0 +1,72 @@
+---
+// Theme choice. The stored value is read before paint by public/theme-init.js.
+---
+
+<label class="theme-control">
+  <span class="sr-only">Theme</span>
+  <select data-theme-control>
+    <option value="dark">Dark</option>
+    <option value="light">Light</option>
+    <option value="auto">System</option>
+  </select>
+</label>
+
+<script>
+  type Choice = 'dark' | 'light' | 'auto';
+
+  const key = 'kyro-theme';
+  const root = document.documentElement;
+  const system = matchMedia('(prefers-color-scheme: light)');
+
+  const parse = (value: unknown): Choice =>
+    value === 'light' || value === 'auto' ? value : 'dark';
+
+  function apply(choice: Choice): void {
+    root.dataset.themeChoice = choice;
+    root.dataset.theme = choice === 'auto' ? (system.matches ? 'light' : 'dark') : choice;
+    for (const select of document.querySelectorAll<HTMLSelectElement>('[data-theme-control]')) {
+      select.value = choice;
+    }
+  }
+
+  apply(parse(root.dataset.themeChoice));
+
+  document.addEventListener('change', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLSelectElement) || !target.matches('[data-theme-control]')) return;
+    const choice = parse(target.value);
+    apply(choice);
+    try {
+      localStorage.setItem(key, choice);
+    } catch {
+      // Without storage the choice lasts for this page only.
+    }
+  });
+
+  system.addEventListener('change', () => {
+    if (root.dataset.themeChoice === 'auto') apply('auto');
+  });
+</script>
+
+<style>
+  select {
+    min-height: 2rem;
+    padding: 0 var(--space-2);
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-control);
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.875rem;
+  }
+
+  select:hover {
+    border-color: var(--strong);
+  }
+
+  @media (pointer: coarse) {
+    select {
+      min-height: 2.75rem;
+    }
+  }
+</style>

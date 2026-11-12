@@ -1,0 +1,59 @@
+/*
+ * Design tokens. See DESIGN.md for the reasons behind them.
+ * Dark is the default; light applies when the visitor chooses it.
+ */
+:root {
+  color-scheme: dark;
+
+  --bg: hsl(200 12% 8%);
+  --surface: hsl(200 10% 12%);
+  --line: hsl(200 8% 21%);
+  --edge: hsl(200 6% 46%);
+  --text: hsl(200 10% 84%);
+  --strong: hsl(200 15% 96%);
+  --muted: hsl(200 6% 64%);
+  --accent: hsl(188 45% 62%);
+
+  /* Windows fonts first: that is the system the readers administer. */
+  --font: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', 'Noto Sans', sans-serif;
+  --font-mono: 'Cascadia Mono', Consolas, ui-monospace, 'SF Mono', Menlo, 'DejaVu Sans Mono', monospace;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  --gutter: var(--space-4);
+  --measure: 42rem;
+  --page: 64rem;
+  --radius-control: 3px;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: hsl(200 20% 98%);
+  --surface: hsl(200 16% 94%);
+  --line: hsl(200 10% 84%);
+  --edge: hsl(200 6% 44%);
+  --text: hsl(200 12% 20%);
+  --strong: hsl(200 20% 8%);
+  --muted: hsl(200 6% 36%);
+  --accent: hsl(190 75% 24%);
+}
+
+@media (min-width: 40rem) {
+  :root {
+    --gutter: var(--space-5);
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --gutter: var(--space-6);
+  }
+}

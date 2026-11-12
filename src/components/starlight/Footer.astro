@@ -1,0 +1,22 @@
+---
+// Starlight's footer (edit link, pagination) followed by the site-wide notes.
+import Default from '@astrojs/starlight/components/Footer.astro';
+import SiteFooter from '../SiteFooter.astro';
+---
+
+<Default><slot /></Default>
+<div class="site-notes"><SiteFooter /></div>
+
+<style>
+  .site-notes {
+    margin-block-start: var(--space-7);
+    padding-block-start: var(--space-5);
+    border-block-start: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  .site-notes :global(p + p) {
+    margin-block-start: var(--space-2);
+  }
+</style>

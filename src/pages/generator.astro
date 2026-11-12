@@ -1,22 +1,25 @@
 ---
 // Reserved address for the autounattend.xml generator. The generator is not
-// built yet; this page only says so. See docs/adr/ for the design.
-import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+// built yet; this page only says so. The design is in docs/adr/.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Status from '../components/Status.astro';
 ---
 
-<StarlightPage
-  frontmatter={{
-    title: 'autounattend.xml generator',
-    description:
-      'Reserved for a browser-based generator for Windows autounattend.xml files. It is not built yet.',
-    tableOfContents: false,
-  }}
+<BaseLayout
+  title="autounattend.xml generator | Kyro"
+  description="Reserved for a browser-based generator for Windows autounattend.xml files. It is not built yet."
 >
-  <p><strong>Status: planned. The generator does not exist yet.</strong></p>
-  <p>
-    This address is reserved for a generator that creates Windows
-    <code>autounattend.xml</code> answer files for use with Kyro. It is meant to run entirely in
-    the browser, without sending anything to a server.
-  </p>
-  <p>Nothing on this page can be used yet.</p>
-</StarlightPage>
+  <div class="prose">
+    <h1>autounattend.xml generator</h1>
+    <Status state="planned" block>Nothing on this page can be used yet.</Status>
+    <p>
+      This address is reserved for a form that creates Windows answer files
+      (<code>autounattend.xml</code>) for use with Kyro. It is meant to run in the browser only,
+      without sending what you enter to any server.
+    </p>
+    <p>
+      The planned options and the rules for turning them into XML are written down as a proposal:{' '}
+      <a href="https://github.com/kyro-pxe/website/blob/main/docs/adr/0001-generator-options.md">ADR 0001, generator option set</a>.
+    </p>
+  </div>
+</BaseLayout>

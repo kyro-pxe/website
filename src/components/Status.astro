@@ -1,0 +1,67 @@
+---
+// A status in the roadmap's vocabulary: a square marker and always the word.
+import { statusLabel, type Status } from '../data/status';
+
+interface Props {
+  state: Status;
+  /** Render as a block with rules above and below instead of inline. */
+  block?: boolean;
+}
+
+const { state, block = false } = Astro.props;
+const Tag = block ? 'p' : 'span';
+---
+
+<Tag class:list={['status', { 'status-block': block }]}>
+  <span class="status-mark" data-state={state} aria-hidden="true"></span>
+  <strong>{statusLabel[state]}</strong>
+  {Astro.slots.has('default') && <span class="status-text"><slot /></span>}
+</Tag>
+
+<style>
+  .status {
+    color: var(--text);
+  }
+
+  .status strong {
+    color: var(--strong);
+    font-weight: 600;
+  }
+
+  .status-text {
+    margin-inline-start: var(--space-1);
+  }
+
+  .status-block {
+    max-width: var(--measure);
+    margin: 0;
+    padding-block: var(--space-3);
+    border-block: 1px solid var(--line);
+  }
+
+  /* Empty: planned. Half: in progress. Filled: working. Filled with ring: tested. */
+  .status-mark {
+    display: inline-block;
+    width: 0.625em;
+    height: 0.625em;
+    margin-inline-end: 0.5em;
+    border: 1.5px solid var(--edge);
+    vertical-align: 0.02em;
+  }
+
+  .status-mark[data-state='in-progress'] {
+    border-color: var(--strong);
+    background: linear-gradient(to right, var(--strong) 50%, transparent 50%);
+  }
+
+  .status-mark[data-state='working'],
+  .status-mark[data-state='tested'] {
+    border-color: var(--strong);
+    background: var(--strong);
+  }
+
+  .status-mark[data-state='tested'] {
+    outline: 1.5px solid var(--strong);
+    outline-offset: 2px;
+  }
+</style>

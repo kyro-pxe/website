@@ -10,7 +10,14 @@ export default defineConfig({
   site,
   output: 'static',
   trailingSlash: 'always',
+  build: {
+    // Styles as files, never inline. A strict Content Security Policy on
+    // the generator page depends on this.
+    inlineStylesheets: 'never',
+  },
   integrations: [
+    // Starlight renders the documentation in src/content/docs/. The home
+    // page, the generator and the 404 page are standalone pages in src/pages/.
     starlight({
       title: 'Kyro',
       description:
@@ -22,19 +29,22 @@ export default defineConfig({
       locales: {
         root: { label: 'English', lang: 'en' },
       },
-      logo: {
-        // Placeholder until Kyro has a logo.
-        src: './src/assets/logo-placeholder.svg',
-        alt: '',
-      },
       favicon: '/favicon.svg',
-      customCss: ['./src/styles/theme.css'],
+      customCss: ['./src/styles/tokens.css', './src/styles/starlight.css'],
       components: {
-        // Dark by default instead of following the system preference.
-        ThemeProvider: './src/components/ThemeProvider.astro',
-        ThemeSelect: './src/components/ThemeSelect.astro',
+        Header: './src/components/starlight/Header.astro',
+        Footer: './src/components/starlight/Footer.astro',
+        ThemeProvider: './src/components/starlight/ThemeProvider.astro',
+        ThemeSelect: './src/components/starlight/ThemeSelect.astro',
       },
-      sidebar: [{ label: 'Generator (planned)', link: '/generator/' }],
+      // The 404 page is src/pages/404.astro.
+      disable404Route: true,
+      // No search while there is no documentation to search. Remove this
+      // line when the first documentation pages exist.
+      pagefind: false,
+      expressiveCode: {
+        styleOverrides: { borderRadius: '0' },
+      },
       social: [
         {
           icon: 'github',
