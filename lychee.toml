@@ -1,0 +1,13 @@
+# Settings for the link checker lychee (https://lychee.cli.rs), which CI runs
+# on the built pages and on the Markdown files of the repository.
+
+no_progress = true
+
+# A link to a directory is a link to the page inside it.
+index_files = ["index.html"]
+
+# Addresses on kyro-pxe.sh are not requested. The pages link to each other
+# with paths, which are checked against the files in dist/. Full addresses
+# only occur as the canonical address of the page itself, and a page that is
+# new in a pull request is not online yet.
+exclude = ['^https://kyro-pxe\.sh']
