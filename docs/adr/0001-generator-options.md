@@ -485,9 +485,11 @@ from the strict Content Security Policy that step 5 requires:
   reads the built `generator/index.html` and fails on any inline script,
   inline style, event handler attribute or external URL.
 
-The policy is delivered as a `<meta>` element, because GitHub Pages cannot
-set response headers, and additionally through `public/_headers` for
-Cloudflare Pages.
+The policy is delivered as a response header through `public/_headers`,
+which Cloudflare Pages reads, and additionally as a `<meta>` element. The
+`<meta>` element keeps the policy in force if the site moves to a host that
+cannot set response headers. It cannot carry `frame-ancestors`, so only the
+header forbids showing the page inside a frame.
 
 ## Test strategy
 
