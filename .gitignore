@@ -24,3 +24,5 @@ coverage/
 *.iso
 *.wim
 *.esd
+test-results/
+playwright-report/

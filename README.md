@@ -2,12 +2,13 @@
 
 Source of <https://kyro-pxe.sh>: the documentation site for
 [Kyro](https://github.com/kyro-pxe/kyro), an open-source PXE server for
-booting Windows 11 ISOs, and the future home of a browser-based
+booting Windows 11 ISOs, and a browser-based
 `autounattend.xml` generator.
 
 > **Status: early development.** The home page and the site's design exist.
-> The documentation pages and the generator are not built yet. Kyro itself
-> cannot boot anything yet.
+> The generator creates Windows 11 answer files and current Kyro alpha
+> profiles. Generated settings still need Windows installation testing.
+> The documentation pages are not built yet.
 
 ## Development
 
@@ -46,6 +47,8 @@ with `pnpm astro telemetry disable` or by setting `ASTRO_TELEMETRY_DISABLED=1`.
 | `src/layouts/` | The layout of the standalone pages. |
 | `src/components/` | Shared parts (header, footer, status marker, boot chain). `starlight/` holds the overrides that make documentation pages use them. |
 | `src/data/` | Content that is data, such as the boot chain steps and their status. |
+| `src/lib/unattend/` | Pure TypeScript generation, validation, XML and Kyro bundle handling, with tests. |
+| `src/components/generator/` | Preact form, mounted by a bundled module without inline code. |
 | `src/styles/` | `tokens.css` (colours, fonts, spacing), `fonts.css` (typefaces), `site.css` (standalone pages), `state.css` (status shapes), `starlight.css` (maps the tokens onto Starlight). |
 | `public/` | Files copied to the site root unchanged, among them `_headers` with the response headers. |
 | `tests/` | Tests that are not about one source file, such as the checks of the headers and of the built pages. |

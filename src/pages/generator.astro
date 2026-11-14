@@ -1,27 +1,25 @@
 ---
-// Reserved address for the autounattend.xml generator. The generator is not
-// built yet; this page only says so. The design is in docs/adr/.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Status from '../components/Status.astro';
 import { generatorPolicy } from '../data/csp';
+import '../styles/generator.css';
 ---
 
 <BaseLayout
   csp={generatorPolicy}
-  title="autounattend.xml generator | Kyro"
-  description="Reserved for a browser-based generator for Windows autounattend.xml files. It is not built yet."
+  title="Windows answer file & Kyro profile generator | Kyro"
+  description="Create Windows 11 autounattend.xml answer files and Kyro deployment profiles in your browser. Configure setup, accounts, disks and scripts without uploading your data."
 >
-  <div class="frame"><div class="plain">
-    <h1>autounattend.xml generator</h1>
-    <Status state="planned" block>Nothing on this page can be used yet.</Status>
-    <p>
-      This address is reserved for a form that creates Windows answer files
-      (<code>autounattend.xml</code>) for use with Kyro. It is meant to run in the browser only,
-      without sending what you enter to any server.
-    </p>
-    <p>
-      The planned options and the rules for turning them into XML are written down as a proposal:{' '}
-      <a href="https://github.com/kyro-pxe/website/blob/main/docs/adr/0001-generator-options.md">ADR 0001, generator option set</a>.
-    </p>
-  </div></div>
+  <div class="frame generator-page">
+    <header class="generator-heading">
+      <div><p class="generator-kicker">Windows answer file generator</p><h1>Your install.<br /><span>Your instructions.</span></h1></div>
+      <div class="generator-heading-copy"><p>Configure Windows once. Download an answer file for your installation media, or a profile ready to import into Kyro.</p><p class="small">Windows 11 · x64 · UEFI<br />Everything you enter stays in this browser.</p></div>
+    </header>
+    <div id="generator-app"><p class="g-loading" role="status">Loading the generator…</p></div>
+    <noscript><p class="g-callout">Enable JavaScript to generate files. All generation runs locally in your browser; no settings are submitted to a server.</p></noscript>
+    <div class="generator-footnote"><p>Review the XML and test it in a virtual machine before installing on hardware. XML syntax checks do not validate an answer file against your Windows image.</p><p><a href="https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/">Windows unattended setup reference</a> · <a href="https://github.com/kyro-pxe/kyro/blob/main/docs/adr/0002-profiles.md">Kyro profile format</a></p></div>
+  </div>
 </BaseLayout>
+
+<script>
+  import '../components/generator/mount';
+</script>

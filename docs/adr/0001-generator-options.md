@@ -1,5 +1,10 @@
 # ADR 0001: Generator option set, output rules and UI framework for v1
 
+> **Implementation note, 2026-11-14:** The generator is now implemented.
+> This record is retained as the original proposal. Current behavior,
+> upstream bundle-version differences and verification limits are in
+> [the generator notes](../generator.md).
+
 - **Status:** Proposed on 2026-11-12. Waiting for maintainer review. Nothing
   described here is implemented.
 - **Date:** 2026-11-12

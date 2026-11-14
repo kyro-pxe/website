@@ -21,18 +21,24 @@
     "check": "astro check",
     "lint:md": "markdownlint-cli2",
     "lint": "pnpm run check && pnpm run lint:md",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:browser": "playwright test"
   },
   "dependencies": {
     "@astrojs/starlight": "0.42.11",
     "@fontsource-variable/archivo": "5.3.0",
     "@fontsource/ibm-plex-mono": "5.3.0",
     "astro": "7.4.11",
+    "preact": "10.26.4",
+    "saxes": "6.0.0",
     "sharp": "0.35.5"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
+    "@playwright/test": "1.63.0",
     "@types/node": "24.19.2",
+    "@xmldom/xmldom": "0.9.12",
+    "fast-check": "4.10.2",
     "markdownlint-cli2": "0.24.1",
     "typescript": "6.0.3",
     "vitest": "5.1.0"

@@ -1,0 +1,628 @@
+.generator-page {
+  padding-block-start: clamp(2rem, 5vw, 4.5rem);
+}
+.generator-heading {
+  display: grid;
+  gap: 1.5rem;
+  padding-block-end: clamp(2rem, 4vw, 3.5rem);
+}
+.generator-kicker {
+  margin-bottom: 1rem;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 600;
+}
+.generator-heading h1 {
+  font-size: clamp(2.125rem, 1.6rem + 2.2vw, 3.5rem);
+  line-height: 1.06;
+}
+.generator-heading h1 span {
+  color: var(--accent);
+}
+.generator-heading-copy {
+  max-width: 27rem;
+  align-self: end;
+}
+.generator-heading-copy > p + p {
+  margin-top: 1rem;
+}
+.g-app {
+  --warning: #f3be64;
+  --danger: #ffb4ab;
+}
+:root[data-theme='light'] .g-app {
+  --warning: #815100;
+  --danger: #ac271e;
+}
+.g-app button,
+.g-app input,
+.g-app select,
+.g-app textarea {
+  font: inherit;
+}
+.g-app button {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--strong);
+  font-size: 0.9375rem;
+  font-weight: 550;
+  cursor: pointer;
+}
+.g-app button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.g-app button:active {
+  background: var(--raised);
+}
+.g-app button:disabled {
+  cursor: not-allowed;
+  color: var(--muted);
+  border-color: var(--line);
+}
+.g-app input:not([type='checkbox']):not([type='file']),
+.g-app select,
+.g-app textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 2.875rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-control);
+  color: var(--strong);
+  background: var(--bg);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.g-app input::placeholder,
+.g-app textarea::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+.g-app textarea {
+  resize: vertical;
+}
+.g-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding-block: 0.75rem;
+  border-block: 1px solid var(--line);
+  font-size: 0.9375rem;
+}
+.g-toolbar > p {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.g-toolbar-note {
+  color: var(--muted);
+  white-space: pre-wrap;
+}
+.g-status-mark {
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: 0.625rem;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  flex: 0 0 auto;
+}
+.g-status-mark.has-error {
+  border-color: var(--warning);
+  background: transparent;
+}
+.g-toolbar-actions,
+.g-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.g-toolbar-actions button {
+  border-color: transparent;
+  text-decoration: underline;
+  text-decoration-color: var(--edge);
+  text-underline-offset: 0.2em;
+}
+.g-notice {
+  color: var(--accent);
+  font-size: 0.9375rem;
+}
+.g-notice:not(:empty),
+.g-error {
+  margin-block: 1rem;
+}
+.g-workspace {
+  display: grid;
+  gap: 1.5rem;
+  margin-block-start: 1.5rem;
+  align-items: start;
+}
+.g-config,
+.g-form-panel,
+.g-output {
+  min-width: 0;
+}
+.g-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.25rem;
+  margin-block-end: 1rem;
+}
+.g-tabs button {
+  display: flex;
+  gap: 0.625rem;
+  align-items: center;
+  text-align: left;
+  border-color: transparent;
+  font-size: 0.875rem;
+  padding: 0.625rem;
+}
+.g-tabs button[aria-selected='true'] {
+  background: var(--raised);
+  color: var(--strong);
+  border-color: var(--edge);
+}
+.g-step {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1px solid var(--edge);
+  color: var(--muted);
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+}
+.g-step.is-set {
+  color: var(--on-accent);
+  border-color: var(--accent);
+  background: var(--accent);
+}
+.g-form-panel {
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-panel);
+  background: var(--surface);
+}
+.g-form-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: end;
+}
+.g-form-heading h2 {
+  font-size: clamp(1.625rem, 1.3rem + 0.8vw, 2.125rem);
+}
+.g-eyebrow {
+  margin-bottom: 0.625rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+.g-review-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: 0.875rem;
+}
+.g-intro {
+  margin-block: 1.25rem 1.75rem;
+  font-size: 1rem;
+  max-width: 42rem;
+}
+.g-field {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.g-form-panel > .g-field,
+.g-form-panel > .g-two,
+.g-form-panel > .g-hint,
+.g-form-panel > .g-callout,
+.g-form-panel > .g-check {
+  margin-block-start: 1.5rem;
+}
+.g-label {
+  display: block;
+  color: var(--strong);
+  font-size: 0.9375rem;
+  font-weight: 550;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.g-hint {
+  display: block;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.g-hint code {
+  overflow-wrap: anywhere;
+}
+.g-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  cursor: pointer;
+  padding-block: 0.375rem;
+}
+.g-check input {
+  flex: 0 0 auto;
+  appearance: none;
+  margin: 0.125rem 0 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1px solid var(--edge);
+  border-radius: 3px;
+  background: var(--bg);
+}
+.g-check input:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.g-check input:checked::after {
+  content: '';
+  display: block;
+  width: 0.625rem;
+  height: 0.375rem;
+  margin: 0.275rem 0.2rem;
+  border-left: 2px solid var(--on-accent);
+  border-bottom: 2px solid var(--on-accent);
+  transform: rotate(-45deg);
+}
+.g-check .g-hint {
+  margin-block-start: 0.25rem;
+}
+.g-group {
+  margin-block-start: 2rem;
+  padding-block-start: 1.75rem;
+  border-block-start: 1px solid var(--line);
+}
+.g-group > .g-hint {
+  margin-top: 0.5rem;
+}
+.g-stack {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+  justify-items: stretch;
+}
+.g-stack > button {
+  justify-self: start;
+}
+.g-two {
+  display: grid;
+  gap: 1.25rem;
+  min-width: 0;
+}
+.g-item {
+  min-width: 0;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-control);
+}
+.g-item legend {
+  padding-inline: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--strong);
+}
+.g-item > * + * {
+  margin-top: 1rem;
+}
+.g-app button.g-remove {
+  color: var(--danger);
+}
+.g-callout,
+.g-danger,
+.g-empty {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--raised);
+  font-size: 0.9375rem;
+}
+.g-callout strong {
+  color: var(--strong);
+}
+.g-callout p,
+.g-danger p {
+  margin-top: 0.5rem;
+}
+.g-danger {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: transparent;
+}
+.g-empty {
+  color: var(--muted);
+}
+.g-token-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.g-token-actions button {
+  font-size: 0.8125rem;
+}
+.g-app-list {
+  max-height: 19rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-control);
+  background: var(--bg);
+}
+.g-app-list .g-label {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+.g-code-input {
+  font-family: var(--font-mono) !important;
+  font-size: 0.8125rem !important;
+  tab-size: 2;
+}
+.g-section-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-block-start: 2rem;
+  padding-block-start: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.g-section-footer .g-hint {
+  max-width: 14rem;
+}
+.g-output {
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-panel);
+  background: var(--surface);
+  scroll-margin-block: 1rem;
+}
+.g-output-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.g-output-heading .g-status-mark {
+  margin-right: 0;
+}
+.g-output-heading h2 {
+  font-size: 1.125rem;
+}
+.g-output-state {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.g-output-body {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.25rem;
+}
+.g-summary {
+  font-size: 0.875rem;
+}
+.g-summary > div {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding-block: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.g-summary dt {
+  color: var(--muted);
+}
+.g-summary dd {
+  color: var(--strong);
+  text-align: right;
+}
+.g-warnings h3,
+.g-errors h3,
+.g-import-help h3 {
+  font-size: 0.9375rem;
+}
+.g-warnings > p {
+  margin-top: 0.5rem;
+}
+.g-warnings ul,
+.g-errors ul {
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  margin-top: 1rem;
+  list-style: none;
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+.g-warnings ul {
+  max-height: 20rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+.g-note-kind {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.g-warning-item .g-note-kind {
+  color: var(--warning);
+}
+.g-errors {
+  color: var(--danger);
+}
+.g-error {
+  color: var(--danger);
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}
+.g-app button.g-download {
+  width: 100%;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 650;
+  min-height: 3.125rem;
+}
+.g-app button.g-download:hover {
+  background: var(--strong);
+  border-color: var(--strong);
+  color: var(--bg);
+}
+.g-app button.g-download:disabled {
+  background: var(--raised);
+  border-color: var(--edge);
+  color: var(--muted);
+}
+.g-preview {
+  min-width: 0;
+  border-block: 1px solid var(--line);
+}
+.g-preview summary {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 3rem;
+  cursor: pointer;
+  color: var(--strong);
+  font-size: 0.875rem;
+}
+.g-preview summary::before {
+  content: '+';
+  font-size: 1.25rem;
+}
+.g-preview[open] summary::before {
+  content: '−';
+}
+.g-preview summary span {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.g-preview pre {
+  max-height: 28rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: var(--bg);
+  padding: 0.75rem;
+  margin-block: 0.75rem;
+  font-size: 0.75rem;
+}
+.g-import-help {
+  min-width: 0;
+}
+.g-import-help > code {
+  display: block;
+  padding-block: 0.75rem;
+  color: var(--strong);
+  overflow-wrap: anywhere;
+  font-size: 0.8125rem;
+}
+.g-dialog {
+  max-width: min(31rem, calc(100vw - 2rem));
+  padding: 1.5rem;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-panel);
+  background: var(--surface);
+  color: var(--text);
+}
+.g-dialog::backdrop {
+  background: #000a;
+}
+.g-dialog h2 {
+  font-size: 1.5rem;
+}
+.g-dialog p {
+  margin-block: 1rem 1.5rem;
+}
+.generator-footnote {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  max-width: 52rem;
+}
+.g-loading {
+  padding: 2rem;
+  border: 1px solid var(--line);
+}
+@media (min-width: 38rem) {
+  .g-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .g-tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .g-form-panel {
+    padding: 1.75rem;
+  }
+}
+@media (min-width: 58rem) {
+  .generator-heading {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 3rem;
+  }
+  .g-workspace {
+    grid-template-columns: minmax(0, 1fr) 21rem;
+    gap: 1.5rem;
+  }
+  .g-output {
+    position: sticky;
+    top: 1rem;
+  }
+  .g-two {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .g-tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .g-review-link {
+    display: none;
+  }
+}
+@media (min-width: 72rem) {
+  .g-workspace {
+    grid-template-columns: minmax(0, 1fr) 23rem;
+    gap: 2rem;
+  }
+  .g-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .g-tabs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (forced-colors: active) {
+  .g-check input {
+    appearance: auto;
+  }
+  .g-check input:checked::after {
+    display: none;
+  }
+  .g-step.is-set,
+  .g-status-mark {
+    background: Highlight;
+    color: HighlightText;
+  }
+}
