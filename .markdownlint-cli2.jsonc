@@ -1,6 +1,6 @@
 {
   "globs": ["**/*.md", "**/*.mdx"],
-  "ignores": ["node_modules", "dist", ".astro"],
+  "ignores": ["node_modules", "dist", ".astro", "test-results", "playwright-report"],
   "config": {
     "default": true,
     // Long lines are fine in tables and link-heavy text.

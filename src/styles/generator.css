@@ -219,6 +219,7 @@
 }
 .g-field {
   display: grid;
+  align-content: start;
   gap: 0.5rem;
   min-width: 0;
 }
@@ -245,6 +246,12 @@
   overflow-wrap: anywhere;
 }
 .g-hint code {
+  overflow-wrap: anywhere;
+}
+.g-field-error {
+  color: var(--danger);
+  font-size: 0.875rem;
+  line-height: 1.6;
   overflow-wrap: anywhere;
 }
 .g-check {
@@ -301,6 +308,7 @@
 }
 .g-two {
   display: grid;
+  align-items: start;
   gap: 1.25rem;
   min-width: 0;
 }

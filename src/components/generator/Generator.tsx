@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'preact/hooks';
+import { useId, useMemo, useRef, useState } from 'preact/hooks';
 import type { ComponentChildren } from 'preact';
 import {
   appCatalogue,
@@ -103,6 +103,7 @@ function Text({
   password = false,
   multi = false,
   code = false,
+  error,
 }: {
   label: string;
   hint?: string;
@@ -112,7 +113,9 @@ function Text({
   password?: boolean;
   multi?: boolean;
   code?: boolean;
+  error?: string | undefined;
 }) {
+  const errorId = useId();
   return (
     <Field label={label} {...(hint ? { hint } : {})}>
       {multi ? (
@@ -121,6 +124,11 @@ function Text({
           rows={code ? 7 : 3}
           value={value}
           onInput={(e) => change(e.currentTarget.value)}
+          onChange={(e) => {
+            if (e.currentTarget.value !== value) change(e.currentTarget.value);
+          }}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? errorId : undefined}
           placeholder={placeholder ?? ''}
           spellcheck={!code}
         />
@@ -130,9 +138,19 @@ function Text({
           autoComplete={password ? 'new-password' : 'off'}
           value={value}
           onInput={(e) => change(e.currentTarget.value)}
+          onChange={(e) => {
+            if (e.currentTarget.value !== value) change(e.currentTarget.value);
+          }}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? errorId : undefined}
           placeholder={placeholder ?? ''}
           spellcheck={false}
         />
+      )}
+      {error && (
+        <span class="g-field-error" id={errorId}>
+          {error}
+        </span>
       )}
     </Field>
   );
@@ -274,18 +292,22 @@ export default function Generator() {
   const [confirmedImportWipe, setConfirmedImportWipe] = useState(false);
   const importInput = useRef<HTMLInputElement>(null);
   const resetDialog = useRef<HTMLDialogElement>(null);
-  const patch = (value: Partial<Options>) => {
-    setOptions((prev) => ({ ...prev, ...value }));
+  const patch = (value: Partial<Options> | ((prev: Options) => Partial<Options>)) => {
+    setOptions((prev) => ({ ...prev, ...(typeof value === 'function' ? value(prev) : value) }));
     setReviewed(false);
     setNotice('');
   };
   const account = (i: number, change: Partial<Account>) =>
-    patch({
-      accounts: o.accounts.map((a, n) => (n === i ? { ...a, ...change } : a)),
-      ...(o.autoLogon !== '' && change.name !== undefined && o.accounts[i]?.name === o.autoLogon
+    patch((prev) => ({
+      accounts: prev.accounts.map((a, n) => (n === i ? { ...a, ...change } : a)),
+      ...(prev.autoLogon !== '' &&
+      change.name !== undefined &&
+      prev.accounts[i]?.name === prev.autoLogon
         ? { autoLogon: change.name }
         : {}),
-    });
+    }));
+  const domain = (change: Partial<Options['domain']>) =>
+    patch((prev) => ({ domain: { ...prev.domain, ...change } }));
   const generated = useMemo((): {
     result?: Result;
     errors: { path: string; message: string }[];
@@ -830,6 +852,10 @@ export default function Generator() {
                         <Text
                           label="Account name"
                           value={a.name}
+                          error={
+                            generated.errors.find((issue) => issue.path === `accounts.${i}.name`)
+                              ?.message
+                          }
                           change={(name) => account(i, { name })}
                         />
                         <Text
@@ -961,7 +987,7 @@ export default function Generator() {
                     label="Join a domain during setup"
                     hint="Uses plain-text join credentials in the answer file."
                     checked={o.domain.enabled}
-                    change={(v) => patch({ domain: { ...o.domain, enabled: v } })}
+                    change={(v) => domain({ enabled: v })}
                   />
                   {o.domain.enabled && (
                     <>
@@ -969,26 +995,26 @@ export default function Generator() {
                         label="DNS domain name"
                         value={o.domain.name}
                         placeholder="Your domain FQDN"
-                        change={(v) => patch({ domain: { ...o.domain, name: v } })}
+                        change={(v) => domain({ name: v })}
                       />
                       <div class="g-two">
                         <Text
                           label="Join account"
                           value={o.domain.username}
-                          change={(v) => patch({ domain: { ...o.domain, username: v } })}
+                          change={(v) => domain({ username: v })}
                         />
                         <Text
                           label="Join password"
                           password
                           value={o.domain.password}
-                          change={(v) => patch({ domain: { ...o.domain, password: v } })}
+                          change={(v) => domain({ password: v })}
                         />
                       </div>
                       <Text
                         label="Organizational unit (optional)"
                         value={o.domain.ou}
                         placeholder="Distinguished name of your OU"
-                        change={(v) => patch({ domain: { ...o.domain, ou: v } })}
+                        change={(v) => domain({ ou: v })}
                       />
                     </>
                   )}
@@ -1309,7 +1335,9 @@ export default function Generator() {
               <h3>
                 {warnings.length
                   ? `${warnings.length} ${warnings.length === 1 ? 'note' : 'notes'} to review`
-                  : 'No warnings'}
+                  : generated.errors.length
+                    ? 'Validation incomplete'
+                    : 'No warnings'}
               </h3>
               {warnings.length ? (
                 <ul>

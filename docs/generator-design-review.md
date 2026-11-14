@@ -76,3 +76,16 @@ UI, not Windows installation validation. Evidence and limitations are in
 - Touch PASS: interactions use clicks or native controls, with no hover-only content.
 - Fixed UI PASS: output is sticky only on wide screens; no fixed mobile navigation covers content.
 - Zoom PASS: 200% text at 640px reflows without horizontal overflow.
+
+## Account form follow-up
+
+Reviewed the reported field alignment and stale validation errors on
+2026-11-14. The existing design direction and dials remain unchanged.
+
+- R-03 PASS: account inputs and selects have equal heights; adjacent controls align within one pixel in both themes at 390, 640, 960, 1200 and 1440 pixels. No horizontal overflow was detected.
+- R-26 PASS: synchronous change-only autofill updates all account and domain fields without overwriting earlier changes. The browser test checks the generated XML values, including encoded passwords.
+- R-27 PASS: invalid account names show an inline explanation; incomplete validation no longer shows the misleading No warnings heading.
+- R-32 PASS: invalid account-name inputs expose aria-invalid and reference their error text with aria-describedby. Native controls and existing focus styles remain intact.
+- R-34 PASS: alignment checks cover dark and light themes; the existing complete browser flow still covers the theme selector and keyboard controls.
+- R-35 PASS: lint, build, all 86 unit/site tests and all three browser tests passed. The corrected account form was also visually inspected from a browser screenshot.
+- R-31 PASS: fields keep their natural height so helper text cannot stretch adjacent controls; functional state updates preserve changes when autofill updates several fields together.

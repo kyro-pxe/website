@@ -1,5 +1,95 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
+
+test('aligns account fields with and without helper text', async ({ page }) => {
+  await page.goto('http://127.0.0.1:4392/generator/');
+  await page.getByRole('tab', { name: /^Accounts/ }).click();
+  await page.getByRole('button', { name: 'Add local account', exact: true }).click();
+  for (const theme of ['light', 'dark']) {
+    await page.locator('[data-theme-control]').selectOption(theme);
+    for (const width of [390, 640, 960, 1200, 1440]) {
+      await page.setViewportSize({ width, height: 1000 });
+      const password = await page.getByLabel(/^Password/).boundingBox();
+      const accountType = await page.getByRole('combobox', { name: /^Account type/ }).boundingBox();
+      if (Math.abs(password.x - accountType.x) > 1) {
+        expect(Math.abs(password.y - accountType.y)).toBeLessThan(1);
+      }
+      expect(Math.abs(password.height - accountType.height)).toBeLessThan(1);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+        true,
+      );
+    }
+  }
+});
+
+test('keeps account values in sync with change-only autofill and explains invalid names', async ({
+  page,
+}, testInfo) => {
+  await page.goto('http://127.0.0.1:4392/generator/');
+  await page.getByRole('tab', { name: /^Accounts/ }).click();
+  await page.getByRole('button', { name: 'Add local account', exact: true }).click();
+  await page.locator('fieldset').evaluate(
+    (fieldset, values) => {
+      const inputs = fieldset.querySelectorAll('input');
+      values.forEach((value, index) => {
+        inputs[index].value = value;
+        inputs[index].dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    },
+    ['admin', 'admin', 'Sample-only-password'],
+  );
+  await expect(page.locator('.g-errors')).toHaveCount(0);
+  await page.locator('[data-theme-control]').selectOption('light');
+  await page
+    .locator('.g-form-panel')
+    .screenshot({ path: testInfo.outputPath('account-fields.png') });
+  await expect(page.getByRole('heading', { name: 'No warnings', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('combobox', { name: /^Sign in automatically as/ })).toHaveValue('');
+  await page.getByRole('combobox', { name: /^Sign in automatically as/ }).selectOption('admin');
+  await page.getByRole('combobox', { name: /^Download format/ }).selectOption('xml');
+  await page.locator('.g-preview summary').click();
+  await expect(page.locator('.g-preview code')).toContainText('<Name>admin</Name>');
+  await expect(page.locator('.g-preview code')).toContainText('<DisplayName>admin</DisplayName>');
+  await expect(page.locator('.g-preview code')).toContainText(
+    Buffer.from('Sample-only-passwordPassword', 'utf16le').toString('base64'),
+  );
+
+  const name = page.getByLabel(/^Account name/);
+  await name.fill('admin|');
+  await expect(name).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.getByRole('heading', { name: 'No warnings', exact: true })).toHaveCount(0);
+  await expect(page.locator('.g-download')).toBeDisabled();
+  await name.fill('admin');
+  await expect(name).not.toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('.g-errors')).toHaveCount(0);
+  await page.getByRole('tab', { name: /^System/ }).click();
+  await page.getByRole('checkbox', { name: /^Join a domain/ }).check();
+  await page
+    .locator('.g-group')
+    .filter({ has: page.getByRole('heading', { name: 'Active Directory domain', exact: true }) })
+    .evaluate(
+      (group, values) => {
+        group.querySelectorAll('input:not([type="checkbox"])').forEach((input, index) => {
+          input.value = values[index];
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+      },
+      [
+        'ad.example.test',
+        'sample-join-user',
+        'Sample-only-domain-password',
+        'OU=Devices,DC=ad,DC=example,DC=test',
+      ],
+    );
+  await expect(page.locator('.g-errors')).toHaveCount(0);
+  await expect(page.locator('.g-preview code')).toContainText(
+    '<JoinDomain>ad.example.test</JoinDomain>',
+  );
+  await expect(page.locator('.g-preview code')).toContainText(
+    '<Username>sample-join-user</Username>',
+  );
+});
+
 test('generates, reviews, downloads and reloads a complete deployment profile', async ({
   page,
 }, testInfo) => {
