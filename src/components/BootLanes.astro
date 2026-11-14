@@ -1,5 +1,5 @@
 ---
-// The steps from power-on to Windows Setup as a chart: one row per step,
+// The steps from power-on to installed Windows as a chart: one row per step,
 // one column per protocol, a bar where the step uses the protocol. The bar's
 // fill is the status of the step, so the chart fills in as Kyro gets built.
 import '../styles/state.css';
@@ -11,7 +11,7 @@ const states: Status[] = ['planned', 'in-progress', 'working', 'tested'];
 
 <figure class="panel lanes">
   <table>
-    <caption>From power-on to Windows Setup</caption>
+    <caption>From network boot to installed Windows</caption>
     <thead>
       <tr>
         <th scope="col" class="step-head">Step</th>

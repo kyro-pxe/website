@@ -13,19 +13,21 @@ export interface BootStep {
 }
 
 /**
- * The steps from power-on to Windows Setup and how far Kyro is with each.
+ * The steps from power-on to installed Windows and how far Kyro is with each.
  *
  * Source: README, docs/architecture.md, docs/ROADMAP.md and ADR 0001 of the
  * Kyro repository. The roadmap there is authoritative. Update `checkedOn`
- * whenever this list is compared against it.
+ * and `sourceRevision` whenever this list is compared against it.
  */
-export const checkedOn = '2026-11-12';
+export const checkedOn = '2026-11-14';
+export const sourceRevision = '65ac0f013db575266f123a32faddbe0636c75f87';
 
 export const bootChain: BootStep[] = [
-  { what: 'The PC asks where to boot from', lanes: ['DHCP'], status: 'planned' },
-  { what: 'Its firmware loads iPXE', lanes: ['TFTP'], status: 'planned' },
-  { what: 'iPXE shows the menu of images', lanes: ['HTTP'], status: 'planned' },
-  { what: 'wimboot starts Windows PE', lanes: ['HTTP'], status: 'planned' },
-  { what: 'Windows PE opens the install share', lanes: ['SMB'], status: 'planned' },
-  { what: 'Windows Setup runs', lanes: ['HTTP', 'SMB'], status: 'planned' },
+  { what: 'Kyro answers with boot information', lanes: ['DHCP'], status: 'tested' },
+  { what: 'The firmware loads iPXE', lanes: ['TFTP'], status: 'tested' },
+  { what: 'Kyro checks that the client is armed', lanes: ['HTTP'], status: 'tested' },
+  { what: 'wimboot starts Windows PE', lanes: ['HTTP'], status: 'tested' },
+  { what: 'Windows PE opens the install share', lanes: ['SMB'], status: 'tested' },
+  { what: 'Windows Setup installs from the share', lanes: ['SMB'], status: 'tested' },
+  { what: 'Installed Windows reports completion', lanes: ['HTTP'], status: 'tested' },
 ];

@@ -10,17 +10,19 @@
 
 The front page of an open-source project for people who install Windows on
 many machines. It has to say in one screen what Kyro is for, show how it
-works, and be honest that almost none of it is built. It sells nothing: the
-actions lead to the source code and the roadmap.
+works, and state the alpha's test limits: one installation in QEMU, no
+physical hardware yet. It sells nothing: the main action opens the browser
+generator, with setup instructions and source code alongside it.
 
 Dial: ENERGY 2 / RHYTHM 3 / MOTION 1
 
 ## Identity
 
-- **The boot chart is the picture.** The steps from power-on to Windows
-  Setup, one row per step and one column per protocol. A bar marks which
-  protocol carries a step. No screenshot, because there is no product to
-  take one of, and no imitation of a terminal.
+- **The boot chart is the picture.** The steps from power-on to installed
+  Windows, one row per step and one column per protocol. A bar marks which
+  protocol carries a step. The chart now follows the alpha's arming check
+  through to the installed system's callback, with its test scope stated
+  beside it.
 - **Status is the motif.** A bar or marker is outlined when a part is
   planned, half filled when it is in progress, filled when it works, and
   filled with a ring when it is tested. The chart therefore fills in as Kyro
@@ -39,10 +41,10 @@ Dial: ENERGY 2 / RHYTHM 3 / MOTION 1
 | Archivo for text and headings, with its wide cut for headings | One family gives two voices. The wide, heavy cut looks like lettering on equipment, which suits a tool for hardware rollouts. |
 | IBM Plex Mono for XML and protocol names | Answer files are the product of the generator, so their type matters. Used only for literal text. |
 | Fonts are served from this site | No request to another server, as the site promises. Both families are under the SIL Open Font License. |
-| Headline first, then text beside a figure | Each section makes one statement and backs it with one figure: chart, fact list, menu example, XML fragment. |
+| Headline first, then text beside a figure | Each section makes one statement and backs it with one figure: chart, fact list, profile example, XML fragment. |
 | Sections differ in form | A page of identical blocks reads as a template. Here a chart, a list of facts, a tree, a band with code and a plain list follow each other. |
 | Panels with a hairline and a 10px radius, controls with 6px | Panels hold figures, controls can be pressed. Nothing has a shadow, because nothing floats. |
-| One filled button per page | It names the most useful action that exists today: reading the source. When the generator works, that becomes the filled button. |
+| One filled button per page | The home page opens the available browser generator; setup instructions are the secondary action. |
 | No motion beyond hover and focus | Nothing on the site happens over time. |
 | Every part states its status in words | The project is early. A landing page without that would promise things that do not exist. |
 
@@ -72,3 +74,12 @@ control edges meet 3:1.
 - Text measure: 38 rem. Page width: 72 rem.
 - One column on phones and tablets, two from 60 rem.
 - Interactive targets are at least 44 px high on touch screens.
+
+## Alpha content update, 2026-11-14
+
+The home page follows the Kyro README, roadmap, architecture, profile ADR
+and security model at commit `65ac0f013db575266f123a32faddbe0636c75f87`.
+The profile example shows reusable answer files selected when arming, since
+an interactive installation menu is still planned. Filled chart bars mean
+tested within the documented QEMU scope; they do not imply physical-hardware
+coverage or that the website generator's output has been installed.

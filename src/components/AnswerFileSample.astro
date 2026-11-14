@@ -1,6 +1,6 @@
 ---
-// A fragment of a real answer file, to show what the generator is going to
-// write. Element and attribute names are from Microsoft's unattend reference
+// An answer file fragment showing the generator's output. Element and
+// attribute names are from Microsoft's unattend reference
 // (Microsoft-Windows-Shell-Setup, pass "specialize"). The part in double
 // braces is a Kyro token.
 type Part = [kind: 'p' | 'tag' | 'attr' | 'val' | 'text' | 'token', value: string];
@@ -23,8 +23,9 @@ const lines: Part[][] = [
   <figcaption>Example: part of an <code>autounattend.xml</code></figcaption>
   <pre tabindex="0" aria-label="Example answer file fragment"><code>{lines.map((line) => <span class="line">{line.map(([kind, value]) => <span class={kind}>{value}</span>)}{'\n'}</span>)}</code></pre>
   <p class="legend">
-    <span class="token">{'{{serial:12}}'}</span> is a Kyro token. Kyro is meant to replace it with
-    the serial number of the PC that asks for the file, cut to 12 characters.
+    <span class="token">{'{{serial:12}}'}</span> is a Kyro token. Kyro replaces it with the last
+    12 characters of the client's sanitized serial number. Windows computer names are limited
+    to 15 characters, including the <code>PC-</code> prefix here.
   </p>
 </figure>
 

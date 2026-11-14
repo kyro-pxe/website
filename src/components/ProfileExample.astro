@@ -1,10 +1,10 @@
 ---
-// One image with the entries the boot menu is meant to offer for it: one per
-// fitting profile, and always one without a profile. The names are examples.
+// Example profiles reuse one ISO. The alpha selects the pair when an
+// administrator arms a client, rather than offering an installation menu.
 ---
 
-<figure class="panel menu">
-  <figcaption>Example: one image, three entries in the boot menu</figcaption>
+<figure class="panel profiles">
+  <figcaption>Example: one image, two reusable profiles</figcaption>
   <div class="tree">
     <p class="node image">
       <span class="kind">Image</span>
@@ -15,34 +15,34 @@
       <li class="node">
         <span class="kind">Profile</span>
         <strong>Office PC</strong>
-        <span class="detail">Answer file. Setup runs without questions.</span>
+        <span class="detail">Answer file with office settings.</span>
       </li>
       <li class="node">
         <span class="kind">Profile</span>
         <strong>Workshop bench</strong>
         <span class="detail">Another answer file for the same image.</span>
       </li>
-      <li class="node">
-        <span class="kind">No profile</span>
-        <strong>Interactive</strong>
-        <span class="detail">Setup asks its questions as usual.</span>
-      </li>
     </ul>
   </div>
+  <p class="small assignment">Choose an image and a profile when you arm a client. Each arming permits one installation.</p>
 </figure>
 
 <style>
-  .menu {
+  .profiles {
     padding: var(--space-4);
   }
 
   @media (min-width: 30rem) {
-    .menu {
+    .profiles {
       padding: var(--space-5);
     }
   }
 
   .tree {
+    margin-block-start: var(--space-4);
+  }
+
+  .assignment {
     margin-block-start: var(--space-4);
   }
 
